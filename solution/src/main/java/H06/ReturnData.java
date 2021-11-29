@@ -2,15 +2,15 @@ package H06;
 
 public class ReturnData {
 
-	public int startIndex, nextIndex;
+	public int result, nextIndex;
 
 	public ReturnData() {
 
 	}
 
 	// optional
-	public ReturnData(int startIndex, int nextIndex) {
-		this.startIndex = startIndex;
+	public ReturnData(int result, int nextIndex) {
+		this.result = result;
 		this.nextIndex = nextIndex;
 	}
 
