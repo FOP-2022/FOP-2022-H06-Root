@@ -52,7 +52,7 @@ public class StrangeThings {
 	}
 
 	public static int evaluate(char[] in) {
-		return evaluateRecursively(in, 0).startIndex;
+		return evaluateRecursively(in, 0).result;
 	}
 
 	private static ReturnData evaluateRecursively(char[] in, int i) {
@@ -62,9 +62,9 @@ public class StrangeThings {
 		ReturnData s1 = evaluateRecursively(in, i + 1);
 		ReturnData s2 = evaluateRecursively(in, s1.nextIndex);
 		if (c == '+') // optional
-			return new ReturnData(s1.startIndex + s2.startIndex, s2.nextIndex);
+			return new ReturnData(s1.result + s2.result, s2.nextIndex);
 		if (c == '-')
-			return new ReturnData(s1.startIndex - s2.startIndex, s2.nextIndex);
+			return new ReturnData(s1.result - s2.result, s2.nextIndex);
 		return null;
 	}
 
