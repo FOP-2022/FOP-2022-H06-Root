@@ -35,7 +35,7 @@ public class StrangeThings {
 		return result;
 	}
 
-	public static double[] transformRecursively(double[] in, Traverser t) {
+	public static double[] transformArrayRecursively(double[] in, Traverser t) {
 		double[] out = new double[in.length];
 		return doTheRecursion(in, out, t, t.getFirstIndex(in));
 	}
