@@ -37,14 +37,15 @@ public class StrangeThings {
 
 	public static double[] transformArrayRecursively(double[] in, Traverser t) {
 		double[] out = new double[in.length];
-		return doTheRecursion(in, out, t, t.getFirstIndex(in));
+    doTheRecursion(in, out, t, t.getFirstIndex(in));
+    return out;
 	}
 
-	private static double[] doTheRecursion(double[] in, double[] out, Traverser t, int i) {
+	private static void doTheRecursion(double[] in, double[] out, Traverser t, int i) {
 		if (i < 0 || i >= in.length)
-			return out;
+			return;
 		out[i] = 3.14 + 2 * in[i];
-		return doTheRecursion(in, out, t, t.getNextIndex(i));
+		doTheRecursion(in, out, t, t.getNextIndex(i));
 	}
 
 	public static int evaluate(String in) {
