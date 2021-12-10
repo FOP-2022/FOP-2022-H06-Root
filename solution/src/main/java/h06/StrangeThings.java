@@ -74,6 +74,6 @@ public class StrangeThings {
         if (c == '-') {
             return new ReturnData(s1.result - s2.result, s2.nextIndex);
         }
-        return null;
+        throw new IllegalArgumentException("Illegal character '" + c + "' at position " + i);
     }
 }
