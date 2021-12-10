@@ -2,8 +2,7 @@ package h06;
 
 public interface Traverser {
 
-	int getFirstIndex(double[] array);
+    int getFirstIndex(double[] array);
 
-	int getNextIndex(int currentIndex);
-
+    int getNextIndex(int currentIndex);
 }
