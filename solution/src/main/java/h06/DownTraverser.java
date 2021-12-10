@@ -1,4 +1,4 @@
-package H06;
+package h06;
 
 public class DownTraverser implements Traverser {
 

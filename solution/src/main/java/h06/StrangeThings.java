@@ -1,4 +1,4 @@
-package H06;
+package h06;
 
 public class StrangeThings {
 
@@ -71,4 +71,3 @@ public class StrangeThings {
 
 
 }
-
