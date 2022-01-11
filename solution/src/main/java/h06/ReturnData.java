@@ -2,7 +2,8 @@ package h06;
 
 public class ReturnData {
 
-    public int result, nextIndex;
+    public int result;
+    public int nextIndex;
 
     public ReturnData() {
 
