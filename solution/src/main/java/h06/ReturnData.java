@@ -13,4 +13,12 @@ public class ReturnData {
         this.result = result;
         this.nextIndex = nextIndex;
     }
+
+    @Override
+    public String toString() {
+        return "ReturnData{" +
+            "result=" + result +
+            ", nextIndex=" + nextIndex +
+            '}';
+    }
 }

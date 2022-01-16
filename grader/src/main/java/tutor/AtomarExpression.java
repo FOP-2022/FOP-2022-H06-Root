@@ -1,11 +1,11 @@
 package tutor;
 
-import h06.ReturnData;
+import student.ReturnData_STUD;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-import static h06.Utils.Messages.indexNotInRange;
+import static tutor.Utils.Messages.indexNotInRange;
 
 public class AtomarExpression extends AbstractExpression {
 
@@ -37,12 +37,12 @@ public class AtomarExpression extends AbstractExpression {
     }
 
     @Override
-    public ReturnData evaluate(int index) {
+    public ReturnData_STUD evaluate(int index) {
         if (index != startIndex)
             throw new RuntimeException(indexNotInRange());
-        ReturnData d = new ReturnData();
-        d.nextIndex = index + 1;
-        d.result = Character.getNumericValue(c);
+        var d = new ReturnData_STUD();
+        d.setNextIndex(index + 1);
+        d.setResult(Character.getNumericValue(c));
         return d;
     }
 }

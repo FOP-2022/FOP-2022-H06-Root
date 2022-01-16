@@ -1,7 +1,7 @@
 package tutor;
 
 
-import h06.ReturnData;
+import student.ReturnData_STUD;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +22,7 @@ public abstract class AbstractExpression implements Comparable<AbstractExpressio
         return getCharacterList().stream().map(String::valueOf).collect(Collectors.joining()).toCharArray();
     }
 
-    public abstract ReturnData evaluate(int index);
+    public abstract ReturnData_STUD evaluate(int index);
 
     public abstract Stream<AbstractExpression> stream();
 
@@ -42,7 +42,7 @@ public abstract class AbstractExpression implements Comparable<AbstractExpressio
         return startIndex() + length();
     }
 
-    public ReturnData evaluate() {
+    public ReturnData_STUD evaluate() {
         return evaluate(startIndex);
     }
 

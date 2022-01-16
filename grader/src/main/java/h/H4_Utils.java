@@ -1,5 +1,6 @@
-package h06;
+package h;
 
+import h06.ReturnData;
 import tutor.AbstractExpression;
 import tutor.AtomarExpression;
 import tutor.Expression;
@@ -13,7 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-public class H4_2_Utils {
+public class H4_Utils {
 
 
     public static final Predicate<AbstractExpression> PREDICATE = e -> e.getCharacterList().size() <= 20;

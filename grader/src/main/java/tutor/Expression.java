@@ -1,14 +1,14 @@
 package tutor;
 
 import com.google.common.collect.Streams;
-import h06.ReturnData;
+import student.ReturnData_STUD;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static h06.Utils.Messages.invalidIndex;
 import static org.junit.jupiter.api.Assertions.fail;
+import static tutor.Utils.Messages.invalidIndex;
 
 public class Expression extends AbstractExpression {
 
@@ -48,7 +48,7 @@ public class Expression extends AbstractExpression {
     }
 
     @Override
-    public ReturnData evaluate(int index) {
+    public ReturnData_STUD evaluate(int index) {
         if (index < startIndex)
             fail(invalidIndex(index));
         if (index >= e2.startIndex)
@@ -56,9 +56,9 @@ public class Expression extends AbstractExpression {
         else if (index >= e1.startIndex)
             return e1.evaluate(index);
 
-        ReturnData d = new ReturnData();
-        d.nextIndex = startIndex + length();
-        d.result = getValue();
+        ReturnData_STUD d = new ReturnData_STUD();
+        d.setNextIndex(startIndex + length());
+        d.setResult(getValue());
         return d;
     }
 
