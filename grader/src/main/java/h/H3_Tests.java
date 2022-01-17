@@ -1,6 +1,7 @@
 package h;
 
 import org.junit.jupiter.api.*;
+import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import reference.UpTraverser_REF;
 import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.code.CtForImpl;
@@ -27,10 +28,11 @@ import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
 import static tutor.Utils.TestCollection.Mode.SHOW_FIRST;
 import static tutor.Utils.TestCollection.test;
 
+
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 public class H3_Tests {
 
-    @BeforeEach
+    @BeforeAll
     public void beforeAll() {
         test()
             .add(TRAVERSER::assureClassResolved)
@@ -40,6 +42,7 @@ public class H3_Tests {
             .run(SHOW_ALL);
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("1 | Interface <Traverser>")
     public static class H3_1_1 {
@@ -105,6 +108,7 @@ public class H3_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("3 | Class <DownTraverser>")
     public static class H3_1_3 {
@@ -218,8 +222,9 @@ public class H3_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
-    @DisplayName("5 | Method <transformArrayRecursively(double[])>")
+    @DisplayName("2 | Method <transformArrayRecursively(double[])>")
     public static class H3_2_2 {
 
         @BeforeAll
@@ -288,8 +293,9 @@ public class H3_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
-    @DisplayName("5 | Method <doTheRecursion(double[],double[],Traverser,int)>")
+    @DisplayName("3 | Method <doTheRecursion(double[],double[],Traverser,int)>")
     public static class H3_2_3 {
 
         @BeforeAll

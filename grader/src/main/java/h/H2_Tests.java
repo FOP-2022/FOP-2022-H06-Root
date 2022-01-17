@@ -1,6 +1,7 @@
 package h;
 
 import org.junit.jupiter.api.*;
+import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import spoon.reflect.code.CtConditional;
 import spoon.reflect.code.CtIf;
 import student.StrangeThings_STUD;
@@ -25,9 +26,11 @@ import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
 import static tutor.Utils.TestCollection.Mode.SHOW_FIRST;
 import static tutor.Utils.TestCollection.test;
 
+@TestForSubmission("h06")
 @DisplayName("H2")
 public class H2_Tests {
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("1 | Method <computeStrangeValue1>")
     public static class H2_1_1 {
@@ -163,6 +166,7 @@ public class H2_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("2 | Method <computeStrangeValue2>")
     public static class H2_1_2 {
@@ -298,6 +302,7 @@ public class H2_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("3 | Method <whatTheHellIsThat1>")
     public static class H2_2_1 {
@@ -469,6 +474,7 @@ public class H2_Tests {
         }
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("3 | Method <whatTheHellIsThat2>")
     public static class H2_2_2 {

@@ -7,7 +7,7 @@ import static org.sourcegrade.jagr.api.rubric.Grader.testAwareBuilder;
 import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.and;
 import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.ofMethod;
 
-@TestForSubmission("H06")
+@RubricForSubmission("h06")
 public class H_Rubric implements RubricProvider {
 
     public static final JUnitTestRef H2_1_0 = JUnitTestRef.or(
@@ -27,11 +27,13 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Mindestens eine der beiden Methoden ist korrekt deklariert.")
         .grader(
             testAwareBuilder().requirePass(
-                JUnitTestRef.or(
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test1"))
-                )
-            ).build()
+                    JUnitTestRef.or(
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test1"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_1_2 = Criterion.builder()
@@ -39,14 +41,16 @@ public class H_Rubric implements RubricProvider {
             "Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_1_0,
-                    JUnitTestRef.or(
-                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test5")),
-                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test5"))
+                    and(
+                        H2_1_0,
+                        JUnitTestRef.or(
+                            ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test5")),
+                            ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test5"))
+                        )
                     )
-                )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_1_3 = Criterion.builder()
@@ -67,7 +71,9 @@ public class H_Rubric implements RubricProvider {
                         )
                     )
                 )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
     public static final Criterion H2_1_4 = Criterion.builder()
         .shortDescription("Beide Methoden sind korrekt implementiert.")
@@ -91,7 +97,9 @@ public class H_Rubric implements RubricProvider {
                     ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test7")),
                     ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test8"))
                 )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_1 = Criterion.builder()
@@ -113,17 +121,20 @@ public class H_Rubric implements RubricProvider {
             ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test3")),
             ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test4"))
         )
+
     );
 
     public static final Criterion H2_2_1 = Criterion.builder()
         .shortDescription("Mindestens eine der beiden Methoden ist korrekt deklariert.")
         .grader(
             testAwareBuilder().requirePass(
-                JUnitTestRef.or(
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test1"))
-                )
-            ).build()
+                    JUnitTestRef.or(
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test1"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_2_2 = Criterion.builder()
@@ -131,14 +142,16 @@ public class H_Rubric implements RubricProvider {
             "Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_2_0,
-                    JUnitTestRef.or(
-                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test5")),
-                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test5"))
+                    and(
+                        H2_2_0,
+                        JUnitTestRef.or(
+                            ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test5")),
+                            ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test5"))
+                        )
                     )
-                )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_2_3 = Criterion.builder()
@@ -146,14 +159,16 @@ public class H_Rubric implements RubricProvider {
             "Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_2_0,
-                    JUnitTestRef.or(
-                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test6")),
-                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test6"))
+                    and(
+                        H2_2_0,
+                        JUnitTestRef.or(
+                            ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test6")),
+                            ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test6"))
+                        )
                     )
-                )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_2_4 = Criterion.builder()
@@ -161,28 +176,32 @@ public class H_Rubric implements RubricProvider {
             "Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_2_0,
-                    JUnitTestRef.or(
-                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test7")),
-                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test7"))
+                    and(
+                        H2_2_0,
+                        JUnitTestRef.or(
+                            ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test7")),
+                            ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test7"))
+                        )
                     )
-                )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H2_2_5 = Criterion.builder()
         .shortDescription("Die Rekursion funktioniert im anderen Fall für mindestens eine der beiden Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_2_0,
-                    JUnitTestRef.or(
-                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test8")),
-                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test8"))
+                    and(
+                        H2_2_0,
+                        JUnitTestRef.or(
+                            ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test8")),
+                            ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test8"))
+                        )
                     )
-                )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
     public static final Criterion H2_2_6 = Criterion.builder()
         .shortDescription("Beide Methoden sind korrekt implementiert.")
@@ -209,7 +228,9 @@ public class H_Rubric implements RubricProvider {
                     ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test9"))
 
                 )
-            ).build()
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
     public static final Criterion H2_2 = Criterion.builder()
         .shortDescription("2.2 | Methoden whatTheHellIsThat1 und whatTheHellIsThat2")
@@ -226,6 +247,8 @@ public class H_Rubric implements RubricProvider {
         .grader(
             testAwareBuilder().requirePass(
                     ofMethod(() -> H3_Tests.H3_1_1.class.getMethod("test1")))
+                .pointsFailedMin()
+                .pointsPassedMax()
                 .build()
         )
         .build();
@@ -234,13 +257,15 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Die Klasse <code>UpTraverser</code> ist korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test2")),
-                    ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test3")),
-                    ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test4"))
-                )
-            ).build()
+                    and(
+                        ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test2")),
+                        ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test3")),
+                        ofMethod(() -> H3_Tests.H3_1_2.class.getMethod("test4"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         )
         .build();
 
@@ -248,13 +273,15 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Die Klasse <code>DownTraverser</code> ist korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test2")),
-                    ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test3")),
-                    ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test4"))
-                )
-            ).build()
+                    and(
+                        ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test2")),
+                        ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test3")),
+                        ofMethod(() -> H3_Tests.H3_1_3.class.getMethod("test4"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         )
         .build();
 
@@ -271,17 +298,19 @@ public class H_Rubric implements RubricProvider {
     public static final Criterion H3_2_1 = Criterion.builder()
         .shortDescription("Mindestens eine der beiden Methoden ist korrekt deklariert.")
         .grader(testAwareBuilder().requirePass(
-            JUnitTestRef.or(
-                and(
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test2"))
-                ),
-                and(
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test2"))
+                JUnitTestRef.or(
+                    and(
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test2"))
+                    ),
+                    and(
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test2"))
+                    )
                 )
-            )
-        ).build())
+            ).pointsFailedMin()
+            .pointsPassedMax()
+            .build())
         .build();
 
     public static final Criterion H3_2_2 = Criterion.builder()
@@ -289,11 +318,13 @@ public class H_Rubric implements RubricProvider {
             "der beiden Methode korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                JUnitTestRef.or(
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test4")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test4"))
-                )
-            ).build()
+                    JUnitTestRef.or(
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test4")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test4"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H3_2_3 = Criterion.builder()
@@ -301,51 +332,61 @@ public class H_Rubric implements RubricProvider {
             "mindestens eine der beiden Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                JUnitTestRef.or(
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test5")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test5"))
-                )
-            ).build()
+                    JUnitTestRef.or(
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test5")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test5"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H3_2_4 = Criterion.builder()
         .shortDescription("Die Methode <code>transformArrayIteratively</code> ist korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test2")),
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test3")),
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test4")),
-                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test5"))
-                )
-            ).build()
+                    and(
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test2")),
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test3")),
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test4")),
+                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test5"))
+                    )
+                ).pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H3_2_5 = Criterion.builder()
         .shortDescription("Die Methode <code>transformArrayRecursively</code> ist korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test2")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test3")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test4")),
-                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test5"))
+                    and(
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test2")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test3")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test4")),
+                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test5"))
+                    )
                 )
-            ).build()
+                .pointsFailedMin()
+                .pointsPassedMax()
+                .build()
         ).build();
 
     public static final Criterion H3_2_6 = Criterion.builder()
         .shortDescription("Die Methode <code>doTheRecursion</code> ist korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test1")),
-                    ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test2")),
-                    ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test3"))
+                    and(
+                        ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test1")),
+                        ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test2")),
+                        ofMethod(() -> H3_Tests.H3_2_3.class.getMethod("test3"))
+                    )
                 )
-            ).build()
+                .pointsPassedMax()
+                .pointsFailedMin()
+                .build()
         ).build();
 
     public static final Criterion H3_2 = Criterion.builder()

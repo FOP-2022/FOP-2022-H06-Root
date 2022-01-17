@@ -1,5 +1,6 @@
 package h;
 
+import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import student.ReturnData_STUD;
 import org.junit.jupiter.api.*;
 import reference.StrangeThings_REF;
@@ -29,9 +30,11 @@ import static tutor.Utils.TestCollection.test;
 import static tutor.Utils.iterate;
 import static tutor.Utils.repeat;
 
+
 public class H4_Tests {
 
     @Nested
+    @TestForSubmission("h06")
     @DisplayName("H4.1 | class <ReturnData>")
     public static class H4_1 {
 
@@ -71,6 +74,8 @@ public class H4_Tests {
 
     }
 
+    @Nested
+    @TestForSubmission("h06")
     public static class H4_2 {
 
 

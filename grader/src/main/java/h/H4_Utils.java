@@ -1,6 +1,5 @@
 package h;
 
-import h06.ReturnData;
 import tutor.AbstractExpression;
 import tutor.AtomarExpression;
 import tutor.Expression;
@@ -29,13 +28,6 @@ public class H4_Utils {
             return new AtomarExpression(index, (char) (48 + r.nextInt(10)));
         AbstractExpression e;
         return new Expression(index, e = getExpression(index + 1, r), getExpression(index + 1 + e.length(), r));
-    }
-
-    public static ReturnData createReturnData(int result, int nextIndex) {
-        var d = new ReturnData();
-        d.result = result;
-        d.nextIndex = nextIndex;
-        return d;
     }
 
     public interface ExpressionStreams {

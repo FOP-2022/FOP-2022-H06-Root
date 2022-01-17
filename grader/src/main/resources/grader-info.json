@@ -1,0 +1,56 @@
+{
+  "name": "FOP-2022-H06",
+  "assignmentIds": [
+    "h06"
+  ],
+  "sourceSets": [
+    {
+      "name": "grader",
+      "files": [
+          "h/H3_Utils.java",
+          "h/H4_Tests.java",
+          "h/H_Rubric.java",
+          "h/H3_Tests.java",
+          "h/H4_Utils.java",
+          "h/H2_Tests.java",
+          "h/Global.java",
+          "student/Traverser_STUD.java",
+          "student/AbstractTraverser_STUD.java",
+          "student/UpTraverser_STUD.java",
+          "student/DownTraverser_STUD.java",
+          "student/ReturnData_STUD.java",
+          "student/RandomTraverser.java",
+          "student/Main_STUD.java",
+          "student/StrangeThings_STUD.java",
+          "student/AbstractArrayTraverser.java",
+          "reflection/ClassTester.java",
+          "reflection/AttributeTester.java",
+          "reflection/AttributeMatcher.java",
+          "reflection/MethodTester.java",
+          "reflection/TestUtils.java",
+          "reflection/ParameterMatcher.java",
+          "reflection/IdentifierMatcher.java",
+          "tutor/Mocked.java",
+          "tutor/AtomarExpression.java",
+          "tutor/AbstractExpression.java",
+          "tutor/Utils.java",
+          "tutor/Expression.java",
+          "reference/UpTraverser_REF.java",
+          "reference/StrangeThings_REF.java"
+
+      ]
+    },
+    {
+      "name": "solution",
+      "files": [
+          "h06/UpTraverser.java",
+          "h06/Main.java",
+          "h06/DownTraverser.java",
+          "h06/RandomTraverser.java",
+          "h06/StrangeThings.java",
+          "h06/ReturnData.java",
+          "h06/Traverser.java"
+      ]
+    }
+  ]
+}
