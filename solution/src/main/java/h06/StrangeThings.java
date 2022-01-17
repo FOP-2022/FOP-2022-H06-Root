@@ -1,7 +1,5 @@
 package h06;
 
-import java.util.Arrays;
-
 public class StrangeThings {
 
     public static int computeStrangeValue1(int n) {
@@ -51,7 +49,6 @@ public class StrangeThings {
             return;
         }
         out[i] = 3.14 + 2 * in[i];
-        t.getNextIndex(i);
         doTheRecursion(in, out, t, t.getNextIndex(i));
     }
 
@@ -77,12 +74,6 @@ public class StrangeThings {
         if (c == '-') {
             return new ReturnData(s1.result - s2.result, s2.nextIndex);
         }
-        return null;
-        //throw new IllegalArgumentException("Illegal character '" + c + "' at position " + i);
+        throw new IllegalArgumentException("Illegal character '" + c + "' at position " + i);
     }
-
-    public static boolean testEvaluate(char[] array, int expected) {
-        return evaluate(array) == expected;
-    }
-
 }
