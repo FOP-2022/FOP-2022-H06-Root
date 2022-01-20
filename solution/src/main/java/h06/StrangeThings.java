@@ -1,7 +1,5 @@
 package h06;
 
-import java.util.Arrays;
-
 public class StrangeThings {
 
     public static int computeStrangeValue1(int n) {

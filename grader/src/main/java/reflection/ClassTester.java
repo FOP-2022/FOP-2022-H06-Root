@@ -337,7 +337,7 @@ public class ClassTester<T> {
      * @return the instance
      */
     @SuppressWarnings("unchecked")
-    public static <T> T findStaicInstance(Class<? super T> clazz, String className) {
+    public static <T> T findStaticInstance(Class<? super T> clazz, String className) {
         assertClassNotNull(clazz, className);
         return (T) mockStatic(clazz, CALLS_REAL_METHODS);
     }
@@ -1153,7 +1153,7 @@ public class ClassTester<T> {
      * @return the instance
      */
     public T resolveStaticInstance() {
-        return classInstance = findStaicInstance(theClass, classIdentifier.identifierName);
+        return classInstance = findStaticInstance(theClass, classIdentifier.identifierName);
     }
 
     /**

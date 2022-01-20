@@ -250,8 +250,6 @@ public interface Utils {
     }
 
     class State {
-
-
         private Object state = 0;
 
         public <T> T get() {
@@ -270,12 +268,9 @@ public interface Utils {
         public <T> void set(T state) {
             this.state = state;
         }
-
     }
 
-
     interface MockitoUtils {
-
         static MockedStatic<?> mockUseDefaultAnswer(Class<?> clazz, Method... methodsTomock) {
             List<Method> methods = List.of(methodsTomock);
             return mockStatic(clazz, a -> {
@@ -284,10 +279,5 @@ public interface Utils {
                 return a.callRealMethod();
             });
         }
-
-
-
     }
-
-
 }
