@@ -1,6 +1,13 @@
 package h;
 
-import org.sourcegrade.jagr.api.rubric.*;
+import org.sourcegrade.jagr.api.rubric.Criterion;
+import org.sourcegrade.jagr.api.rubric.Grader;
+import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
+import org.sourcegrade.jagr.api.rubric.Rubric;
+import org.sourcegrade.jagr.api.rubric.RubricForSubmission;
+import org.sourcegrade.jagr.api.rubric.RubricProvider;
+import org.sourcegrade.jagr.api.testing.RubricConfiguration;
+import transform.StrangeThings_Transformer;
 
 import static org.sourcegrade.jagr.api.rubric.Grader.descendingPriority;
 import static org.sourcegrade.jagr.api.rubric.Grader.testAwareBuilder;
@@ -58,19 +65,19 @@ public class H_Rubric implements RubricProvider {
             "mindestens eine der beiden Methoden korrekt.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    H2_1_0,
-                    JUnitTestRef.or(
-                        and(
-                            ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test6")),
-                            ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test7"))
-                        ),
-                        and(
-                            ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test6")),
-                            ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test7"))
+                    and(
+                        H2_1_0,
+                        JUnitTestRef.or(
+                            and(
+                                ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test6")),
+                                ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test7"))
+                            ),
+                            and(
+                                ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test6")),
+                                ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test7"))
+                            )
                         )
                     )
-                )
                 ).pointsFailedMin()
                 .pointsPassedMax()
                 .build()
@@ -79,24 +86,24 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Beide Methoden sind korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test2")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test3")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test4")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test5")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test6")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test7")),
-                    ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test8")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test2")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test3")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test4")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test5")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test6")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test7")),
-                    ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test8"))
-                )
+                    and(
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test2")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test3")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test4")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test5")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test6")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test7")),
+                        ofMethod(() -> H2_Tests.H2_1_1.class.getMethod("test8")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test2")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test3")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test4")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test5")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test6")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test7")),
+                        ofMethod(() -> H2_Tests.H2_1_2.class.getMethod("test8"))
+                    )
                 ).pointsFailedMin()
                 .pointsPassedMax()
                 .build()
@@ -207,27 +214,27 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Beide Methoden sind korrekt implementiert.")
         .grader(
             testAwareBuilder().requirePass(
-                and(
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test2")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test3")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test4")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test5")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test6")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test7")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test8")),
-                    ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test9")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test1")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test2")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test3")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test4")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test5")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test6")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test7")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test8")),
-                    ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test9"))
+                    and(
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test2")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test3")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test4")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test5")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test6")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test7")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test8")),
+                        ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test9")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test1")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test2")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test3")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test4")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test5")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test6")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test7")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test8")),
+                        ofMethod(() -> H2_Tests.H2_2_2.class.getMethod("test9"))
 
-                )
+                    )
                 ).pointsFailedMin()
                 .pointsPassedMax()
                 .build()
@@ -581,5 +588,10 @@ public class H_Rubric implements RubricProvider {
             H4_2,
             H4_3
         ).build();
+    }
+
+    @Override
+    public void configure(RubricConfiguration configuration) {
+        configuration.addTransformer(new StrangeThings_Transformer());
     }
 }

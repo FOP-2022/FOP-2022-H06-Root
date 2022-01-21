@@ -36,8 +36,9 @@
           "tutor/Utils.java",
           "tutor/Expression.java",
           "reference/UpTraverser_REF.java",
-          "reference/StrangeThings_REF.java"
-
+          "reference/StrangeThings_REF.java",
+          "h06/StrangeThings_Foo.java",
+          "transform/StrangeThings_Transformer.java"
       ]
     },
     {
