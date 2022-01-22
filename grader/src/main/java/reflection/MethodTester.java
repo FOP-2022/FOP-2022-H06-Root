@@ -650,24 +650,14 @@ public class MethodTester {
      * @return the Returned Value of the Method
      */
     public <T> T invoke(Object instance, Object... params) {
-        if (instance instanceof Mocked)
-            instance = ((Mocked) instance).getActualObject();
-        for (int i = 0; i < params.length; i++)
-            if (params[i] instanceof Mocked)
-                params[i] = ((Mocked) params[i]).getActualObject();
-        if (instance != null)
-            assertInvokeable();
-        assertDoesNotThrow(() -> theMethod.setAccessible(true), "Konnte Methode nicht ausführen.");
-        Object returnValue = null;
-        try {
-            System.out.println(theMethod.getName());
-            System.out.println(Arrays.toString(params));
+        if (instance instanceof Mocked) instance = ((Mocked) instance).getActualObject(); for (int i = 0; i < params.length; i++)
+            if (params[i] instanceof Mocked) params[i] = ((Mocked) params[i]).getActualObject(); if (instance != null) assertInvokeable(); assertDoesNotThrow(() -> theMethod.setAccessible(true), "Konnte Methode nicht ausführen.");
+        Object returnValue = null; try {
             returnValue = theMethod.invoke(instance, params);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
+            if (e instanceof InvocationTargetException && ((InvocationTargetException) e).getTargetException() instanceof RuntimeException) throw (RuntimeException) ((InvocationTargetException) e).getTargetException();
             fail("Method Could not be invoked.", e);
-        }
-        return (T) returnValue;
+        } return (T) returnValue;
     }
 
     public <T> T invokeStatic(Object... params) {
