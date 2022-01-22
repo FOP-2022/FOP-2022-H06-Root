@@ -5,7 +5,7 @@ import java.util.Random;
 public interface H3_Utils {
 
     static double[] createDoubleArray(Random random, int minSize, int maxSize) {
-        return random.doubles(minSize+random.nextInt(maxSize+1-minSize)).toArray();
+        return random.doubles(minSize + random.nextInt(maxSize + 1 - minSize)).toArray();
     }
 
     static double[] createDoubleArray(Random random) {

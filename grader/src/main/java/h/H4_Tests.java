@@ -1,9 +1,12 @@
 package h;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
-import student.ReturnData_STUD;
-import org.junit.jupiter.api.*;
 import reference.StrangeThings_REF;
+import student.ReturnData_STUD;
 import student.StrangeThings_STUD;
 import tutor.AbstractExpression;
 import tutor.Expression;
@@ -12,20 +15,21 @@ import tutor.Utils.State;
 
 import java.util.Arrays;
 
-import static h.H4_Utils.*;
 import static h.Global.RANDOM;
 import static h.Global.T;
-import static student.Main_STUD.*;
-import static student.ReturnData_STUD.*;
-import static student.StrangeThings_STUD.*;
 import static h.H4_Utils.ExpressionMappings.TO_NON_ATOMAR;
 import static h.H4_Utils.ExpressionPredicates.ATOMAR;
 import static h.H4_Utils.ExpressionPredicates.NON_ATOMAR;
 import static h.H4_Utils.ExpressionStreams.expressions;
+import static h.H4_Utils.getExpression;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static reference.StrangeThings_REF.evaluateRecursively_REF;
+import static student.Main_STUD.*;
+import static student.ReturnData_STUD.*;
+import static student.StrangeThings_STUD.*;
 import static tutor.Utils.Messages.*;
-import static tutor.Utils.TestCollection.Mode.*;
+import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
 import static tutor.Utils.TestCollection.test;
 import static tutor.Utils.iterate;
 import static tutor.Utils.repeat;
@@ -104,9 +108,10 @@ public class H4_Tests {
         @Test
         @DisplayName("2 | implementation of <evaluate(char[])")
         public void test2() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var lastArray = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::evaluateRecursively_STUD).then(a -> {
+                when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                     char[] array = a.getArgument(0);
                     int index = a.getArgument(1);
                     test("evaluate")
@@ -127,7 +132,8 @@ public class H4_Tests {
         @Test
         @DisplayName("3 | declaration of <evaluateRecursively(char[],int)")
         public void test3() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 test()
                     .add(EVALUATE_RECURSIVELY::assertAccessModifier)
                     .add(EVALUATE_RECURSIVELY::assertParametersMatch)
@@ -140,11 +146,12 @@ public class H4_Tests {
         @Test
         @DisplayName("4 | no recursive call for atomic sub-expression")
         public void test4() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
                     for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
                         State state = new State();
-                        STRANGE_THINGS_MOCK.when(StrangeThings_STUD::evaluateRecursively_STUD).then(a -> {
+                        when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                             if (state.incInt() == 0) return a.callRealMethod();
                             return test("evaluateRecursively").run(() -> fail(unexpectedCall()), e, se.startIndex());
                         });
@@ -158,7 +165,8 @@ public class H4_Tests {
         @Test
         @DisplayName("5 | returned values for atomic sub-expression")
         public void test5() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
                     for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
                         ReturnData_STUD d = evaluateRecursively_STUD(e.characters(), se.startIndex());
@@ -175,11 +183,12 @@ public class H4_Tests {
         @Test
         @DisplayName("7 | 1st recursive call for 1st non-atomic sub-expressions")
         public void test7() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
                     for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
                         var state = new State();
-                        STRANGE_THINGS_MOCK.when(StrangeThings_STUD::evaluateRecursively_STUD).then(a -> {
+                        when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                             int index = a.getArgument(1);
                             state.incInt();
                             if (state.getInt() == 1) {
@@ -201,11 +210,12 @@ public class H4_Tests {
         @Test
         @DisplayName("8 | 2nd recursive call for 2nd non-atomic sub-expressions")
         public void test8() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
                     for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
                         var state = new State();
-                        STRANGE_THINGS_MOCK.when(StrangeThings_STUD::evaluateRecursively_STUD).then(a -> {
+                        when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                             int index = a.getArgument(1);
                             state.incInt();
                             if (state.getInt() == 1) {
@@ -227,11 +237,12 @@ public class H4_Tests {
         @Test
         @DisplayName("9 | returned value for non-atomic sub-expression")
         public void test9() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
                     for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
                         var state = new State();
-                        STRANGE_THINGS_MOCK.when(StrangeThings_STUD::evaluateRecursively_STUD).then(a -> {
+                        when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                             int index = a.getArgument(1);
                             state.incInt();
                             if (state.getInt() == 1) return a.callRealMethod();
@@ -253,7 +264,8 @@ public class H4_Tests {
         @Test
         @DisplayName("10 | returned values (including atomic expressions)")
         public void test10() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 for (AbstractExpression e : iterate(expressions(RANDOM).limit(100).sorted())) {
                     var expected = e.evaluate();
                     var actual = evaluateRecursively_STUD(e.characters(), 0);
@@ -288,7 +300,8 @@ public class H4_Tests {
         @Test
         @DisplayName("1 | declaration")
         public void test1() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            var ignored = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 test()
                     .add(EVALUATE_RECURSIVELY::assertAccessModifier)
                     .add(EVALUATE_RECURSIVELY::assertParametersMatch)
@@ -299,9 +312,10 @@ public class H4_Tests {
         @Test
         @DisplayName("2 | correct values")
         public void test2() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var counter = new State();
-                STRANGE_THINGS_MOCK.when(TEST_EVALUATE_VERIFICATION).then(a -> {
+                when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                     char[] array = a.getArgument(0);
                     int expected = a.getArgument(1);
                     int actual = StrangeThings_REF.evaluateRef(array);
@@ -318,9 +332,10 @@ public class H4_Tests {
         @Test
         @DisplayName("3 | incorrect values")
         public void test3() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var counter = new State();
-                STRANGE_THINGS_MOCK.when(TEST_EVALUATE_VERIFICATION).then(a -> {
+                when(StrangeThings_STUD.evaluateRecursively_STUD()).then(a -> {
                     char[] array = a.getArgument(0);
                     int expected = a.getArgument(1);
                     int actual = StrangeThings_REF.evaluateRef(array);

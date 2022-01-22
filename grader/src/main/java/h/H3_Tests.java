@@ -6,11 +6,16 @@ import reference.UpTraverser_REF;
 import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtWhileImpl;
-import student.*;
+import student.DownTraverser_STUD;
+import student.RandomTraverser;
+import student.StrangeThings_STUD;
+import student.UpTraverser_STUD;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static h.Global.RANDOM;
+import static h.Global.T;
 import static h.H3_Utils.createDoubleArray;
 import static h.H3_Utils.createEmptyOutput;
 import static java.util.Arrays.stream;
@@ -19,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static reference.StrangeThings_REF.transformArray_REF;
 import static student.DownTraverser_STUD.DOWN_TRAVERSER;
-import static h.Global.RANDOM;
-import static h.Global.T;
 import static student.StrangeThings_STUD.*;
 import static student.UpTraverser_STUD.*;
 import static tutor.Utils.Messages.*;
@@ -326,7 +329,8 @@ public class H3_Tests {
         @Test
         @DisplayName("3 | Return Values")
         public void test3() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            var ignored = StrangeThings_STUD.getStrangeThingsMock();
+            {
                 range(0, T).forEach(i -> {
                         var input = createDoubleArray(RANDOM);
                         var inputSave = Arrays.copyOf(input, input.length);

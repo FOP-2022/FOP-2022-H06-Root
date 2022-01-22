@@ -1,13 +1,7 @@
 package h;
 
-import org.sourcegrade.jagr.api.rubric.Criterion;
-import org.sourcegrade.jagr.api.rubric.Grader;
-import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
-import org.sourcegrade.jagr.api.rubric.Rubric;
-import org.sourcegrade.jagr.api.rubric.RubricForSubmission;
-import org.sourcegrade.jagr.api.rubric.RubricProvider;
+import org.sourcegrade.jagr.api.rubric.*;
 import org.sourcegrade.jagr.api.testing.RubricConfiguration;
-import transform.StrangeThings_Transformer;
 
 import static org.sourcegrade.jagr.api.rubric.Grader.descendingPriority;
 import static org.sourcegrade.jagr.api.rubric.Grader.testAwareBuilder;
@@ -82,6 +76,7 @@ public class H_Rubric implements RubricProvider {
                 .pointsPassedMax()
                 .build()
         ).build();
+
     public static final Criterion H2_1_4 = Criterion.builder()
         .shortDescription("Beide Methoden sind korrekt implementiert.")
         .grader(
@@ -117,6 +112,7 @@ public class H_Rubric implements RubricProvider {
             H2_1_3,
             H2_1_4
         ).build();
+
     public static final JUnitTestRef H2_2_0 = JUnitTestRef.or(
         and(
             ofMethod(() -> H2_Tests.H2_2_1.class.getMethod("test2")),
@@ -210,6 +206,7 @@ public class H_Rubric implements RubricProvider {
                 .pointsPassedMax()
                 .build()
         ).build();
+
     public static final Criterion H2_2_6 = Criterion.builder()
         .shortDescription("Beide Methoden sind korrekt implementiert.")
         .grader(
@@ -239,6 +236,7 @@ public class H_Rubric implements RubricProvider {
                 .pointsPassedMax()
                 .build()
         ).build();
+
     public static final Criterion H2_2 = Criterion.builder()
         .shortDescription("2.2 | Methoden whatTheHellIsThat1 und whatTheHellIsThat2")
         .addChildCriteria(
@@ -249,6 +247,7 @@ public class H_Rubric implements RubricProvider {
             H2_2_5,
             H2_2_6
         ).build();
+
     public static final Criterion H3_1_1 = Criterion.builder()
         .shortDescription("Das Interface <code>Traverser</code> ist korrekt deklariert.")
         .grader(
@@ -580,18 +579,18 @@ public class H_Rubric implements RubricProvider {
         return Rubric.builder()
             .title("H06 | Strange Things")
             .addChildCriteria(
-            H2_1,
-            H2_2,
-            H3_1,
-            H3_2,
-            H4_1,
-            H4_2,
-            H4_3
-        ).build();
+                H2_1,
+                H2_2,
+                H3_1,
+                H3_2,
+                H4_1,
+                H4_2,
+                H4_3
+            ).build();
     }
 
     @Override
     public void configure(RubricConfiguration configuration) {
-        configuration.addTransformer(new StrangeThings_Transformer());
+        configuration.addTransformer(Global.TRANSFORMER);
     }
 }

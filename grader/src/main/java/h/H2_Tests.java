@@ -11,15 +11,16 @@ import tutor.Utils.State;
 import java.util.Arrays;
 import java.util.List;
 
+import static h.Global.RANDOM;
+import static h.Global.T;
 import static java.util.Arrays.asList;
 import static java.util.stream.IntStream.range;
 import static java.util.stream.IntStream.rangeClosed;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.when;
 import static reference.StrangeThings_REF.computeStrangeValueRef;
 import static reference.StrangeThings_REF.whatTheHellIsThatRef;
-import static h.Global.RANDOM;
-import static h.Global.T;
 import static student.StrangeThings_STUD.*;
 import static tutor.Utils.Messages.*;
 import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
@@ -80,29 +81,30 @@ public class H2_Tests {
         @Test
         @DisplayName("5 | Anchor (N<=0)")
         public void test5() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
-                var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue1_STUDENT).then(a -> {
-                    if (numberOfCall.incInt() == 0)
-                        return a.callRealMethod();
-                    return fail(unexpectedRecursiveCallFor("computeStrangeValue1", Arrays.asList(a.getArguments())));
-                });
-                var test = test("computeStrangeValue1");
-                rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
-                    numberOfCall.set(0);
-                    if (numberOfCall.getInt() > 1)
-                        fail(unexpectedRecursiveCallFor("computeStrangeValue1", List.of(i)));
-                }, i));
-                test.run(SHOW_FIRST);
-            }
+            StrangeThings_STUD.getStrangeThingsMock();
+            var numberOfCall = new State();
+            when(StrangeThings_STUD.computeStrangeValue1_STUDENT()).then(a -> {
+                if (numberOfCall.incInt() == 0)
+                    return a.callRealMethod();
+                return fail(unexpectedRecursiveCallFor("computeStrangeValue1", Arrays.asList(a.getArguments())));
+            });
+            var test = test("computeStrangeValue1");
+            rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
+                numberOfCall.set(0);
+                if (numberOfCall.getInt() > 1)
+                    fail(unexpectedRecursiveCallFor("computeStrangeValue1", List.of(i)));
+            }, i));
+            test.run(SHOW_FIRST);
+
         }
 
         @Test
         @DisplayName("6 | Recursion I (N%2=0)")
         public void test6() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue1_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -123,9 +125,10 @@ public class H2_Tests {
         @Test
         @DisplayName("7 | Recursion II (N%2!=0)")
         public void test7() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue1_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -146,9 +149,10 @@ public class H2_Tests {
         @Test
         @DisplayName("8 | Return Values")
         public void test8() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue1_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -216,9 +220,10 @@ public class H2_Tests {
         @Test
         @DisplayName("5 | Anchor (N<=0)")
         public void test5() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return fail(unexpectedRecursiveCallFor("computeStrangeValue2", Arrays.asList(a.getArguments())));
@@ -236,9 +241,10 @@ public class H2_Tests {
         @Test
         @DisplayName("6 | Recursion I (N%2=0)")
         public void test6() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -259,9 +265,10 @@ public class H2_Tests {
         @Test
         @DisplayName("7 | Recursion II (N%2!=0)")
         public void test7() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -282,9 +289,10 @@ public class H2_Tests {
         @Test
         @DisplayName("8 | Return Values")
         public void test8() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::computeStrangeValue2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.computeStrangeValue2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return computeStrangeValueRef(a.getArgument(0));
@@ -352,9 +360,10 @@ public class H2_Tests {
         @Test
         @DisplayName("5 | Anchor (if m<=0)")
         public void test5() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat1_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat1", asList(a.getArguments())));
@@ -373,9 +382,10 @@ public class H2_Tests {
         @Test
         @DisplayName("6 | Anchor (if n<=0)")
         public void test6() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat1_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat1", asList(a.getArguments())));
@@ -393,11 +403,12 @@ public class H2_Tests {
         @Test
         @DisplayName("7 | Recursion (if m<n)")
         public void test7() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
                 var firstM = new State();
                 var firstN = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat1_STUDENT()).then(a -> {
                     int m = a.getArgument(0);
                     int n = a.getArgument(1);
                     if (numberOfCall.incInt() == 0) {
@@ -426,11 +437,12 @@ public class H2_Tests {
         @Test
         @DisplayName("8 | Recursion (else)")
         public void test8() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
                 var firstM = new State();
                 var firstN = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat1_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat1_STUDENT()).then(a -> {
                     int m = a.getArgument(0);
                     int n = a.getArgument(1);
                     if (numberOfCall.incInt() == 0) {
@@ -459,7 +471,8 @@ public class H2_Tests {
         @Test
         @DisplayName("9 | Return Values")
         public void test9() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var test = test("whatTheHellIsThat1");
                 range(-10, 10).forEach(n -> rangeClosed(-10, 10).forEach(m -> {
                     if (m == 1 && n == 2 || m == 2 & n == 1)
@@ -524,9 +537,10 @@ public class H2_Tests {
         @Test
         @DisplayName("5 | Anchor (if m<=0)")
         public void test5() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat2", asList(a.getArguments())));
@@ -545,9 +559,10 @@ public class H2_Tests {
         @Test
         @DisplayName("6 | Anchor (if n<=0)")
         public void test6() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat2_STUDENT()).then(a -> {
                     if (numberOfCall.incInt() == 0)
                         return a.callRealMethod();
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat2", asList(a.getArguments())));
@@ -565,11 +580,12 @@ public class H2_Tests {
         @Test
         @DisplayName("7 | Recursion (if m<n)")
         public void test7() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
                 var firstM = new State();
                 var firstN = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat2_STUDENT()).then(a -> {
                     int m = a.getArgument(0);
                     int n = a.getArgument(1);
                     if (numberOfCall.incInt() == 0) {
@@ -598,11 +614,12 @@ public class H2_Tests {
         @Test
         @DisplayName("8 | Recursion (else)")
         public void test8() {
-            try (var STRANGE_THINGS_MOCK = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var numberOfCall = new State();
                 var firstM = new State();
                 var firstN = new State();
-                STRANGE_THINGS_MOCK.when(StrangeThings_STUD::whatTheHellIsThat2_STUDENT).then(a -> {
+                when(StrangeThings_STUD.whatTheHellIsThat2_STUDENT()).then(a -> {
                     int m = a.getArgument(0);
                     int n = a.getArgument(1);
                     if (numberOfCall.incInt() == 0) {
@@ -631,7 +648,8 @@ public class H2_Tests {
         @Test
         @DisplayName("9 | Return Values")
         public void test9() {
-            try (var ignored = StrangeThings_STUD.getStrangeThingsMock()) {
+            StrangeThings_STUD.getStrangeThingsMock();
+            {
                 var test = test("whatTheHellIsThat2");
                 range(-10, 10).forEach(n -> rangeClosed(-10, 10).forEach(m -> {
                     if (m == 1 && n == 2 || m == 2 & n == 1)
