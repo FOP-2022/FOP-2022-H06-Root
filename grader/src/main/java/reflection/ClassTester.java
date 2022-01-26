@@ -212,8 +212,9 @@ public class ClassTester<T> {
      * @param className the Class Name for the error Message
      */
     public static void assertClassNotNull(Class<?> theClass, String className) {
-        if (theClass == null)
+        if (theClass == null) {
             fail(String.format("class %s does not exist", className));
+        }
     }
 
     /**
@@ -596,8 +597,9 @@ public class ClassTester<T> {
             VirtualFile vf = null;
             if (cycle != null) {
                 SourceFile sourceFile = cycle.getSubmission().getSourceFile(sourceFileName);
-                if (sourceFile == null)
+                if (sourceFile == null) {
                     fail(String.format("file %s does not exist", sourceFileName));
+                }
                 spoon.addInputResource(new VirtualFile(Objects.requireNonNull(sourceFile).getContent(), sourceFileName));
             } else {
                 spoon.addInputResource("../solution/src/main/java/" + sourceFileName);
@@ -631,11 +633,13 @@ public class ClassTester<T> {
             .sorted((x, y) -> Double.valueOf(TestUtils.similarity(y.getName(), matcher.identifierName))
                 .compareTo(TestUtils.similarity(x.getName(), matcher.identifierName)))
             .findFirst().orElse(null);
-        if (bestMatch == null)
+        if (bestMatch == null) {
             fail(String.format("attribute <%s> does not exist", matcher.identifierName));
+        }
         var sim = TestUtils.similarity(bestMatch.getName(), matcher.identifierName);
-        if (sim < matcher.similarity)
+        if (sim < matcher.similarity) {
             fail(String.format("attribute <%s> does not exist", matcher.identifierName));
+        }
         return bestMatch;
     }
 

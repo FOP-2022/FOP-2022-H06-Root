@@ -134,8 +134,9 @@ public class H4_Tests {
                 lastArray.set(array);
                 evaluate_STUD(array);
             });
-            if (lastArray.get() == null)
+            if (lastArray.get() == null) {
                 fail("no call");
+            }
 
         }
 
@@ -154,7 +155,9 @@ public class H4_Tests {
                     for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
                         State state = new State();
                         getEvaluateRecursively().invoke(doAnswer(a -> {
-                            if (state.incInt() == 0) return a.callRealMethod();
+                            if (state.incInt() == 0) {
+                                return a.callRealMethod();
+                            }
                             return test("evaluateRecursively").run(() -> fail(unexpectedCall()), e, se.startIndex());
                         }).when(getStrangeThingsMock()), any(char[].class), anyInt());
                         evaluateRecursively_STUD(e.characters(), se.startIndex());
@@ -200,7 +203,9 @@ public class H4_Tests {
                             return e.evaluate(index).getActualObject();
                         }).when(getStrangeThingsMock()), any(char[].class), anyInt());
                         evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        if (state.getInt() < 2) fail("missing call");
+                        if (state.getInt() < 2) {
+                            fail("missing call");
+                        }
                     }
                 }
             }
@@ -226,7 +231,9 @@ public class H4_Tests {
                             return e.evaluate(index).getActualObject();
                         }).when(getStrangeThingsMock()), any(char[].class), anyInt());
                         evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        if (state.getInt() < 3) fail("missing call");
+                        if (state.getInt() < 3) {
+                            fail("missing call");
+                        }
                     }
                 }
             }
@@ -243,7 +250,9 @@ public class H4_Tests {
                         getEvaluateRecursively().invoke(doAnswer(a -> {
                             int index = a.getArgument(1);
                             state.incInt();
-                            if (state.getInt() == 1) return a.callRealMethod();
+                            if (state.getInt() == 1) {
+                                return a.callRealMethod();
+                            }
                             return se.evaluate(index).getActualObject();
                         }).when(getStrangeThingsMock()), any(char[].class), anyInt());
                         var expected = se.evaluate();

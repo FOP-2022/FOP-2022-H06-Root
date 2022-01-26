@@ -30,8 +30,9 @@ public class StrangeThings_REF {
 
     public static int evaluateRef(char[] in) {
         var r = evaluateRecursively_REF(in, 0);
-        if (r == null)
+        if (r == null) {
             return Integer.MIN_VALUE;
+        }
         return r.getResult();
     }
 
@@ -42,8 +43,9 @@ public class StrangeThings_REF {
         }
         ReturnData_STUD s1 = evaluateRecursively_REF(in, i + 1);
         ReturnData_STUD s2 = evaluateRecursively_REF(in, s1.getNextIndex());
-        if (c == '-')
+        if (c == '-') {
             return new ReturnData_STUD(s1.getResult() - s2.getResult(), s2.getNextIndex());
+        }
         return null;
     }
 

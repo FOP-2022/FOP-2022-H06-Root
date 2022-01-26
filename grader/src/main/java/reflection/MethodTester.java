@@ -356,12 +356,18 @@ public class MethodTester {
     }
 
     public static boolean isRecursive(List<CtElement> elements, CtMethod<?> methodToCall, int level) {
-        if (level <= 0) return false;
+        if (level <= 0) {
+            return false;
+        }
         for (var e : elements) {
             if (e instanceof CtInvocation<?>) {
                 var method = (CtInvocation<?>) e;
-                if (method.getExecutable().equals(methodToCall.getReference())) return true;
-                if (isRecursive(e.getDirectChildren(), methodToCall, level - 1)) return true;
+                if (method.getExecutable().equals(methodToCall.getReference())) {
+                    return true;
+                }
+                if (isRecursive(e.getDirectChildren(), methodToCall, level - 1)) {
+                    return true;
+                }
             } else if (isRecursive(e.getDirectChildren(), methodToCall, level)) {
                 return true;
             }
@@ -625,21 +631,26 @@ public class MethodTester {
      * @return the Returned Value of the Method
      */
     public <T> T invoke(Object instance, Object... params) {
-        if (instance instanceof Mocked)
+        if (instance instanceof Mocked) {
             instance = ((Mocked) instance).getActualObject();
-        for (int i = 0; i < params.length; i++)
-            if (params[i] instanceof Mocked)
+        }
+        for (int i = 0; i < params.length; i++) {
+            if (params[i] instanceof Mocked) {
                 params[i] = ((Mocked) params[i]).getActualObject();
+            }
+        }
 
-        if (instance != null)
+        if (instance != null) {
             assertInvokeable();
+        }
         assertDoesNotThrow(() -> theMethod.setAccessible(true), "method could not be invoked");
         Object returnValue = null;
         try {
             returnValue = theMethod.invoke(instance, params);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            if (e instanceof InvocationTargetException && ((InvocationTargetException) e).getTargetException() instanceof RuntimeException)
+            if (e instanceof InvocationTargetException && ((InvocationTargetException) e).getTargetException() instanceof RuntimeException) {
                 throw (RuntimeException) ((InvocationTargetException) e).getTargetException();
+            }
 //            Arrays.stream(e.getStackTrace()).forEach(x -> Global.LOGGER.log(Level.WARN, x));
             fail("method could not be invoked", e);
 
@@ -681,7 +692,9 @@ public class MethodTester {
     }
 
     public void assertInvoked() {
-        if (getInvocationCount() == 0) fail(wasNotCalledRecursively(getMethodIdentifier().identifierName));
+        if (getInvocationCount() == 0) {
+            fail(wasNotCalledRecursively(getMethodIdentifier().identifierName));
+        }
     }
 
     /**
@@ -722,18 +735,22 @@ public class MethodTester {
     public void assertConstructsNotUsed(List<Class<? extends CtCodeElement>> disallowedConstructs) {
         var method = assertCtMethodExists();
         var test = test();
-        for (var construct : disallowedConstructs)
-            if (!method.getElements(new TypeFilter<>(construct)).isEmpty())
+        for (var construct : disallowedConstructs) {
+            if (!method.getElements(new TypeFilter<>(construct)).isEmpty()) {
                 test.add(() -> fail(String.format("<%s> was used unexpectedly", construct.getSimpleName().substring(2))));
+            }
+        }
         test.run();
     }
 
     public void assertConstructsUsed(List<Class<? extends CtCodeElement>> disallowedConstructs) {
         var method = assertCtMethodExists();
         var test = test();
-        for (var construct : disallowedConstructs)
-            if (method.getElements(new TypeFilter<>(construct)).isEmpty())
+        for (var construct : disallowedConstructs) {
+            if (method.getElements(new TypeFilter<>(construct)).isEmpty()) {
                 test.add(() -> fail(String.format("<%s> was not used unexpectedly", construct.getSimpleName().substring(2))));
+            }
+        }
         test.run();
     }
 
@@ -752,8 +769,9 @@ public class MethodTester {
 
     public void assertRecursive(int level) {
         var m = assertCtMethodExists();
-        if (!isRecursive(m.getDirectChildren(), m, level))
+        if (!isRecursive(m.getDirectChildren(), m, level)) {
             fail(String.format("method <%s> is not recursive", getMethodIdentifier().identifierName));
+        }
     }
 
     public void assertNotDirectlyRecursive() {
@@ -762,8 +780,9 @@ public class MethodTester {
 
     public void assertNotRecursive(int level) {
         var m = assertCtMethodExists();
-        if (isRecursive(m.getDirectChildren(), m, level))
+        if (isRecursive(m.getDirectChildren(), m, level)) {
             fail(String.format("method <%s> is recursive", getMethodIdentifier().identifierName));
+        }
     }
 
 

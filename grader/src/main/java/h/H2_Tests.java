@@ -93,15 +93,17 @@ public class H2_Tests {
         public void test5() {
             var numberOfCall = new State();
             StrangeThings_STUD.computeStrangeValue1_STUD().then(a -> {
-                if (numberOfCall.incInt() == 0)
+                if (numberOfCall.incInt() == 0) {
                     return a.callRealMethod();
+                }
                 return fail(unexpectedRecursiveCallFor("computeStrangeValue1", Arrays.asList(a.getArguments())));
             });
             var test = test("computeStrangeValue1");
             rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
                 numberOfCall.set(0);
-                if (numberOfCall.getInt() > 1)
+                if (numberOfCall.getInt() > 1) {
                     fail(unexpectedRecursiveCallFor("computeStrangeValue1", List.of(i)));
+                }
             }, i));
             test.run(SHOW_FIRST);
 
@@ -114,8 +116,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue1_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue1");
@@ -124,8 +127,9 @@ public class H2_Tests {
                     .forEach(n -> test.add(() -> {
                         numberOfCall.set(0);
                         computeStrangeValue1_STUD(n);
-                        if (numberOfCall.getInt() == 1)
+                        if (numberOfCall.getInt() == 1) {
                             fail(wasNotCalledRecursively("computeStrangeValue1"));
+                        }
                     }));
                 test.run(SHOW_FIRST);
             }
@@ -138,8 +142,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue1_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue1");
@@ -148,8 +153,9 @@ public class H2_Tests {
                     .forEach(n -> test.add(() -> {
                         numberOfCall.set(0);
                         computeStrangeValue1_STUD(n);
-                        if (numberOfCall.getInt() == 1)
+                        if (numberOfCall.getInt() == 1) {
                             fail(wasNotCalledRecursively("computeStrangeValue1"));
+                        }
                     }));
                 test.run(SHOW_FIRST);
             }
@@ -162,16 +168,18 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue1_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue1");
                 rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
                     numberOfCall.set(0);
                     assertEquals(1, computeStrangeValue1_STUD(i));
-                    if (numberOfCall.getInt() > 1)
+                    if (numberOfCall.getInt() > 1) {
                         fail(unexpectedRecursiveCallFor("computeStrangeValue1", List.of(i)));
+                    }
                 }, i));
                 test.run(SHOW_FIRST);
             }
@@ -232,15 +240,17 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return fail(unexpectedRecursiveCallFor("computeStrangeValue2", Arrays.asList(a.getArguments())));
                 });
                 var test = test("computeStrangeValue2");
                 rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
                     numberOfCall.set(0);
-                    if (numberOfCall.getInt() > 1)
+                    if (numberOfCall.getInt() > 1) {
                         fail(unexpectedRecursiveCallFor("computeStrangeValue2", List.of(i)));
+                    }
                 }, i));
                 test.run(SHOW_FIRST);
             }
@@ -253,8 +263,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue2");
@@ -263,8 +274,9 @@ public class H2_Tests {
                     .forEach(n -> test.add(() -> {
                         numberOfCall.set(0);
                         computeStrangeValue2_STUD(n);
-                        if (numberOfCall.getInt() == 1)
+                        if (numberOfCall.getInt() == 1) {
                             fail(wasNotCalledRecursively("computeStrangeValue2"));
+                        }
                     }));
                 test.run(SHOW_FIRST);
             }
@@ -277,8 +289,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue2");
@@ -287,8 +300,9 @@ public class H2_Tests {
                     .forEach(n -> test.add(() -> {
                         numberOfCall.set(0);
                         computeStrangeValue2_STUD(n);
-                        if (numberOfCall.getInt() == 1)
+                        if (numberOfCall.getInt() == 1) {
                             fail(wasNotCalledRecursively("computeStrangeValue2"));
+                        }
                     }));
                 test.run(SHOW_FIRST);
             }
@@ -301,16 +315,18 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.computeStrangeValue2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return computeStrangeValueRef(a.getArgument(0));
                 });
                 var test = test("computeStrangeValue2");
                 rangeClosed(-T + 1, 0).forEach(i -> test.add(() -> {
                     numberOfCall.set(0);
                     assertEquals(1, computeStrangeValue2_STUD(i));
-                    if (numberOfCall.getInt() > 1)
+                    if (numberOfCall.getInt() > 1) {
                         fail(unexpectedRecursiveCallFor("computeStrangeValue2", List.of(i)));
+                    }
                 }, i));
                 test.run(SHOW_FIRST);
             }
@@ -372,8 +388,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.whatTheHellIsThat1_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat1", asList(a.getArguments())));
                 });
                 var test = test("whatTheHellIsThat1");
@@ -394,8 +411,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.whatTheHellIsThat1_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat1", asList(a.getArguments())));
                 });
                 rangeClosed(-T + 1, 0).forEach(n -> {
@@ -432,12 +450,14 @@ public class H2_Tests {
                     return whatTheHellIsThatRef(m, n);
                 });
                 range(1, 10).forEach(m -> rangeClosed(m + 1, 10).forEach(n -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     numberOfCall.set(0);
                     whatTheHellIsThat1_STUD(m, n);
-                    if (numberOfCall.getInt() == 1)
+                    if (numberOfCall.getInt() == 1) {
                         fail(wasNotCalledRecursively("whatTheHellIsThat1"));
+                    }
                 }));
             }
         }
@@ -466,12 +486,14 @@ public class H2_Tests {
                     return whatTheHellIsThatRef(m, n);
                 });
                 range(1, 10).forEach(n -> rangeClosed(n, 10).forEach(m -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     numberOfCall.set(0);
                     whatTheHellIsThat1_STUD(m, n);
-                    if (numberOfCall.getInt() == 1)
+                    if (numberOfCall.getInt() == 1) {
                         fail(wasNotCalledRecursively("whatTheHellIsThat1"));
+                    }
                 }));
             }
         }
@@ -483,12 +505,14 @@ public class H2_Tests {
             {
                 var test = test("whatTheHellIsThat1");
                 range(-10, 10).forEach(n -> rangeClosed(-10, 10).forEach(m -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     test.add(() -> assertEquals(whatTheHellIsThatRef(m, n), whatTheHellIsThat1_STUD(m, n),
                         incorrectReturnValue()), m, n);
-                    if (m == 0 && n == 0)
+                    if (m == 0 && n == 0) {
                         test.letShow();
+                    }
                 }));
                 test.run(SHOW_FIRST);
             }
@@ -549,8 +573,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.whatTheHellIsThat2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat2", asList(a.getArguments())));
                 });
                 var test = test("whatTheHellIsThat2");
@@ -571,8 +596,9 @@ public class H2_Tests {
             {
                 var numberOfCall = new State();
                 StrangeThings_STUD.whatTheHellIsThat2_STUD().then(a -> {
-                    if (numberOfCall.incInt() == 0)
+                    if (numberOfCall.incInt() == 0) {
                         return a.callRealMethod();
+                    }
                     return fail(unexpectedRecursiveCallFor("whatTheHellIsThat2", asList(a.getArguments())));
                 });
                 rangeClosed(-T + 1, 0).forEach(n -> {
@@ -609,12 +635,14 @@ public class H2_Tests {
                     return whatTheHellIsThatRef(m, n);
                 });
                 range(1, 10).forEach(m -> rangeClosed(m + 1, 10).forEach(n -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     numberOfCall.set(0);
                     StrangeThings_STUD.whatTheHellIsThat2_STUD(m, n);
-                    if (numberOfCall.getInt() == 1)
+                    if (numberOfCall.getInt() == 1) {
                         fail(wasNotCalledRecursively("whatTheHellIsThat2"));
+                    }
                 }));
             }
         }
@@ -643,12 +671,14 @@ public class H2_Tests {
                     return whatTheHellIsThatRef(m, n);
                 });
                 range(1, 10).forEach(n -> rangeClosed(n, 10).forEach(m -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     numberOfCall.set(0);
                     StrangeThings_STUD.whatTheHellIsThat2_STUD(m, n);
-                    if (numberOfCall.getInt() == 1)
+                    if (numberOfCall.getInt() == 1) {
                         fail(wasNotCalledRecursively("whatTheHellIsThat2"));
+                    }
                 }));
             }
         }
@@ -659,12 +689,14 @@ public class H2_Tests {
             {
                 var test = test("whatTheHellIsThat2");
                 range(-10, 10).forEach(n -> rangeClosed(-10, 10).forEach(m -> {
-                    if (m == 1 && n == 2 || m == 2 & n == 1)
+                    if (m == 1 && n == 2 || m == 2 & n == 1) {
                         return;
+                    }
                     test.add(() -> assertEquals(whatTheHellIsThatRef(m, n),
                         StrangeThings_STUD.whatTheHellIsThat2_STUD(m, n), incorrectReturnValue()), m, n);
-                    if (m == 0 && n == 0)
+                    if (m == 0 && n == 0) {
                         test.letShow();
+                    }
                 }));
                 test.run(SHOW_FIRST);
             }

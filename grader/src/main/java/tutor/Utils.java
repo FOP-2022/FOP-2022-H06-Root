@@ -125,8 +125,9 @@ public interface Utils {
 
             }
             if (entry.hasError()) {
-                if (!builder.isEmpty())
+                if (!builder.isEmpty()) {
                     builder.append(' ');
+                }
                 builder.append(entry.error.getMessage());
             }
             return builder.toString();
@@ -201,12 +202,15 @@ public interface Utils {
                     e.runnable.run();
                 } catch (AssertionFailedError error) {
                     e.error = error;
-                    if (e.newType)
+                    if (e.newType) {
                         countType = 0;
-                    if (mode == Mode.SHOW_FIRST && countType == 0)
+                    }
+                    if (mode == Mode.SHOW_FIRST && countType == 0) {
                         e.show |= true;
-                    if (mode == Mode.SHOW_ALL)
+                    }
+                    if (mode == Mode.SHOW_ALL) {
                         e.show |= true;
+                    }
                     if (e.terminate()) {
                         e.show |= true;
                         break;

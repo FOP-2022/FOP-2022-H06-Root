@@ -40,21 +40,24 @@ public class Expression extends AbstractExpression {
 
     @Override
     public boolean isValidIndex(int index) {
-        if (index >= e2.startIndex)
+        if (index >= e2.startIndex) {
             return e2.isValidIndex(index);
-        else if (index >= e1.startIndex)
+        } else if (index >= e1.startIndex) {
             return e1.isValidIndex(index);
+        }
         return index == startIndex;
     }
 
     @Override
     public ReturnData_STUD evaluate(int index) {
-        if (index < startIndex)
+        if (index < startIndex) {
             fail(invalidIndex(index));
-        if (index >= e2.startIndex)
+        }
+        if (index >= e2.startIndex) {
             return e2.evaluate(index);
-        else if (index >= e1.startIndex)
+        } else if (index >= e1.startIndex) {
             return e1.evaluate(index);
+        }
 
         ReturnData_STUD d = new ReturnData_STUD();
         d.setNextIndex(startIndex + length());

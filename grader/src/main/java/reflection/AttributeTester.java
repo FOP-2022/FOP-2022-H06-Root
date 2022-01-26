@@ -48,8 +48,9 @@ public class AttributeTester {
     }
 
     private void assureAccessible(Object object) {
-        if (!field.canAccess(isStatic(field.getModifiers()) ? null : object))
+        if (!field.canAccess(isStatic(field.getModifiers()) ? null : object)) {
             assertDoesNotThrow(() -> field.setAccessible(true));
+        }
     }
 
     public <T> T getValue() {

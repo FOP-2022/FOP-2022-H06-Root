@@ -24,8 +24,9 @@ public class H4_Utils {
 
     private static AbstractExpression getExpression(int index, Random r) {
         boolean isAtomar = r.nextBoolean();
-        if (isAtomar)
+        if (isAtomar) {
             return new AtomarExpression(index, (char) (48 + r.nextInt(10)));
+        }
         AbstractExpression e;
         return new Expression(index, e = getExpression(index + 1, r), getExpression(index + 1 + e.length(), r));
     }

@@ -38,8 +38,9 @@ public class AtomarExpression extends AbstractExpression {
 
     @Override
     public ReturnData_STUD evaluate(int index) {
-        if (index != startIndex)
+        if (index != startIndex) {
             throw new RuntimeException(indexNotInRange());
+        }
         var d = new ReturnData_STUD();
         d.setNextIndex(index + 1);
         d.setResult(Character.getNumericValue(c));

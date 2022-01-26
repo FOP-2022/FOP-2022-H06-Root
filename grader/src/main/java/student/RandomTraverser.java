@@ -45,8 +45,9 @@ public class RandomTraverser extends AbstractArrayTraverser {
 
     @Override
     public int getNextIndex(int index) {
-        if (map == null)
+        if (map == null) {
             return 0;
+        }
         return map.get(index);
     }
 
