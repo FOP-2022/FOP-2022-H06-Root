@@ -1,56 +1,55 @@
 package student;
 
 
-import org.eclipse.jdt.core.dom.Modifier;
 import reflection.ClassTester;
-import reflection.IdentifierMatcher;
 import reflection.MethodTester;
 import reflection.ParameterMatcher;
 import tutor.Mocked;
 
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.reflect.Modifier.*;
 import static h.Global.SIMILARITY;
+import static java.util.Objects.requireNonNullElseGet;
 
-public interface Traverser_STUD extends Mocked {
+public abstract class Traverser_STUD implements Mocked {
 
-    public static final ClassTester<?> TRAVERSER = new ClassTester<>(
-        "h06",
-        "Traverser",
-        SIMILARITY,
-        PUBLIC | ABSTRACT | INTERFACE);
-    public static final MethodTester TRAVERSER_GET_NEXT_INDEX = new MethodTester(
-        TRAVERSER,
-        "getNextIndex",
-        SIMILARITY,
-        PUBLIC,
-        int.class,
-        List.of(new ParameterMatcher(int.class))
-    );
-    public static final MethodTester TRAVERSER_GET_FIRST_INDEX = new MethodTester(
-        TRAVERSER,
-        "getFirstIndex",
-        SIMILARITY,
-        Modifier.NONE,
-        int.class,
-        List.of(new ParameterMatcher(double[].class))
-    );
-    public static final IdentifierMatcher TRAVERSER_MATCHER = new IdentifierMatcher(
-        "Traverser",
-        "h06",
-        SIMILARITY
-    );
-    public static final ClassTester<?> UP_TRAVERSER_CLASS = new ClassTester<>(
-        "h06",
-        "UpTraverser",
-        SIMILARITY,
-        PUBLIC,
-        List.of(TRAVERSER_MATCHER)
-    );
+    private static ClassTester<?> cTraverserO;
+    public static ClassTester<?> cTraverser() {
+        return cTraverserO = Objects.requireNonNullElseGet(cTraverserO, () -> new ClassTester<>(
+            "h06",
+            "Traverser",
+            SIMILARITY,
+            PUBLIC | ABSTRACT | INTERFACE).assureResolved());
+    }
 
-    public int getFirstIndex(double[] array);
+    private static MethodTester mGetFirstIndexO;
+    public static MethodTester mGetFirstIndex() {
+        return mGetFirstIndexO = requireNonNullElseGet(mGetFirstIndexO, () -> new MethodTester(
+            cTraverser(),
+            "getFirstIndex",
+            SIMILARITY,
+            PUBLIC,
+            int.class,
+            List.of(new ParameterMatcher(double[].class))
+        ).assureResolved());
+    }
 
-    public int getNextIndex(int index);
+    private static MethodTester mGetNextIndexO;
+    public static MethodTester mGetNextIndex() {
+        return mGetNextIndexO = requireNonNullElseGet(mGetNextIndexO, () -> new MethodTester(
+            cTraverser(),
+            "getNextIndex",
+            SIMILARITY,
+            PUBLIC,
+            int.class,
+            List.of(new ParameterMatcher(int.class))
+        ).assureResolved());
+    }
+
+    public abstract int getFirstIndex(double[] array);
+
+    public abstract int getNextIndex(int index);
 
 }

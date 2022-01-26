@@ -9,47 +9,60 @@ import java.util.List;
 
 import static java.lang.reflect.Modifier.PUBLIC;
 import static h.Global.SIMILARITY;
+import static java.util.Objects.*;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
+import static org.mockito.Mockito.mock;
 
-public class DownTraverser_STUD implements Traverser_STUD {
+public class DownTraverser_STUD extends Traverser_STUD {
 
-    public static final ClassTester<?> DOWN_TRAVERSER = new ClassTester(
-        "h06",
-        "DownTraverser",
-        SIMILARITY,
-        Modifier.PUBLIC);
+    private static ClassTester<?> cDownTraverserO;
+    public static ClassTester<?> cDownTraverser() {
+        return cDownTraverserO = requireNonNullElseGet(cDownTraverserO, () -> new ClassTester<>(
+            "h06",
+            "DownTraverser",
+            SIMILARITY,
+            Modifier.PUBLIC).assureResolved());
+    }
 
-    public static final MethodTester DOWN_TRAVERSER_GET_FIRST_INDEX = new MethodTester(
-        DOWN_TRAVERSER,
-        "getFirstIndex",
-        SIMILARITY,
-        PUBLIC,
-        int.class,
-        List.of(new ParameterMatcher(double[].class))
-    );
+    private static MethodTester mGetFirstIndexO;
+    public static MethodTester mGetFirstIndexS() {
+        return mGetFirstIndexO = requireNonNullElseGet(mGetFirstIndexO, () -> new MethodTester(
+            cDownTraverser(),
+            "getFirstIndex",
+            SIMILARITY,
+            PUBLIC,
+            int.class,
+            List.of(new ParameterMatcher(double[].class))
+        ).assureResolved());
+    }
 
-    public static final MethodTester DOWN_TRAVERSER_GET_NEXT_INDEX = new MethodTester(
-        DOWN_TRAVERSER,
-        "getNextIndex",
-        SIMILARITY,
-        PUBLIC,
-        int.class,
-        List.of(new ParameterMatcher(int.class))
-    );
+    private static MethodTester mGetNextIndexO;
+    public static MethodTester mGetNextIndexS() {
+        return mGetNextIndexO = requireNonNullElseGet(mGetNextIndexO, () -> new MethodTester(
+            cDownTraverser(),
+            "getNextIndex",
+            SIMILARITY,
+            PUBLIC,
+            int.class,
+            List.of(new ParameterMatcher(int.class))
+        ).assureResolved());
+    }
 
     private final Object object;
 
     public DownTraverser_STUD() {
-        object = DOWN_TRAVERSER.assureClassResolved().getNewInstance();
+        object = mock(cDownTraverser().getTheClass(), CALLS_REAL_METHODS);
+        cDownTraverser().setClassInstance(object);
     }
 
     @Override
     public int getFirstIndex(double[] array) {
-        return DOWN_TRAVERSER_GET_FIRST_INDEX.assureMethodResolved().invoke(object, array);
+        return mGetFirstIndexS().invoke(object, (Object) array);
     }
 
     @Override
     public int getNextIndex(int index) {
-        return DOWN_TRAVERSER_GET_NEXT_INDEX.assureMethodResolved().invoke(object, index);
+        return mGetNextIndexS().invoke(object, index);
     }
 
     @Override

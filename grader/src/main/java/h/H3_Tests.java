@@ -8,7 +8,6 @@ import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 import student.DownTraverser_STUD;
 import student.RandomTraverser;
-import student.StrangeThings_STUD;
 import student.UpTraverser_STUD;
 
 import java.util.Arrays;
@@ -23,67 +22,55 @@ import static java.util.stream.IntStream.range;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static reference.StrangeThings_REF.transformArray_REF;
-import static student.DownTraverser_STUD.DOWN_TRAVERSER;
+import static student.DownTraverser_STUD.cDownTraverser;
 import static student.StrangeThings_STUD.*;
+import static student.Traverser_STUD.cTraverser;
 import static student.UpTraverser_STUD.*;
 import static tutor.Utils.Messages.*;
 import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
-import static tutor.Utils.TestCollection.Mode.SHOW_FIRST;
 import static tutor.Utils.TestCollection.test;
 
 
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 public class H3_Tests {
 
-    @BeforeAll
-    public void beforeAll() {
-        test()
-            .add(TRAVERSER::assureClassResolved)
-            .terminateOnException()
-            .add(TRAVERSER_GET_FIRST_INDEX::assureMethodResolved)
-            .add(TRAVERSER_GET_NEXT_INDEX::assureMethodResolved)
-            .run(SHOW_ALL);
-    }
-
     @TestForSubmission("h06")
     @Nested
     @DisplayName("1 | Interface <Traverser>")
     public static class H3_1_1 {
 
-        @BeforeAll
-        public static void beforeAll() {
-            TRAVERSER.assureClassResolved();
+        @Test
+        @DisplayName("0 | requirements")
+        public void test0() {
+            test()
+                .add(cTraverser()::assureResolved)
+                .run(SHOW_ALL);
         }
 
         @Test
         @DisplayName("1 | Declaration")
         public void test1() {
-            test()
-                .add(TRAVERSER::assertAccessModifier)
-                .add(TRAVERSER::assertIsInterface)
-                .run(SHOW_ALL);
+            cTraverser().assertCorrectDeclaration();
         }
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("2 | Class <UpTraverser>")
     public static class H3_1_2 {
 
-        @BeforeAll
-        public static void beforeAll() {
-            UP_TRAVERSER.assureClassResolved();
+        @Test
+        @DisplayName("0 | requirements")
+        public void test0() {
+            test()
+                .add(cUpTraverser()::assureResolved)
+                .run(SHOW_ALL);
         }
 
         @Test
-        @DisplayName("1 | Access Modifiers")
+        @DisplayName("1 | Declaration")
         public void test1() {
-            UP_TRAVERSER.assertAccessModifier();
-        }
-
-        @Test
-        @DisplayName("2 | Interface")
-        public void test2() {
-            UP_TRAVERSER.assertImplementsInterfaces(List.of(TRAVERSER_MATCHER));
+            cUpTraverser().assertCorrectDeclaration();
         }
 
         @Test
@@ -116,21 +103,18 @@ public class H3_Tests {
     @DisplayName("3 | Class <DownTraverser>")
     public static class H3_1_3 {
 
-        @BeforeAll
-        public static void beforeEach() {
-            DOWN_TRAVERSER.assureClassResolved();
+        @Test
+        @DisplayName("0 | requirements")
+        public void test0() {
+            test()
+                .add(cDownTraverser()::assureResolved)
+                .run(SHOW_ALL);
         }
 
         @Test
-        @DisplayName("1 | Access Modifiers")
+        @DisplayName("1 | Declaration")
         public void test1() {
-            DOWN_TRAVERSER.assertAccessModifier();
-        }
-
-        @Test
-        @DisplayName("2 | Interface")
-        public void test2() {
-            DOWN_TRAVERSER.assertImplementsInterfaces(List.of(TRAVERSER_MATCHER));
+            cDownTraverser().assertCorrectDeclaration();
         }
 
         @Test
@@ -158,38 +142,34 @@ public class H3_Tests {
 
     }
 
+    @TestForSubmission("h06")
     @Nested
     @DisplayName("4 | Method <transformArrayIteratively(double[])>")
-    public static class H3_2_1 {
+    public class H3_2_1 {
 
-        @BeforeAll
-        public static void beforeAll() {
-            test()
-                .add(STRANGE_THINGS::assureClassResolved)
-                .add(TRANSFORM_ARRAY_ITERATIVELY::assureMethodResolved)
-                .add(TRAVERSER::assureClassResolved)
-                .run(SHOW_FIRST);
+        @BeforeEach
+        public void beforeEach() {
+            resetStrangeThingsMock();
         }
 
         @Test
-        @DisplayName("1 | Access Modifiers")
-        public void test1() {
-            TRANSFORM_ARRAY_ITERATIVELY.assertAccessModifier();
-        }
-
-        @Test
-        @DisplayName("2 | Parameter and Return Types")
-        public void test2() {
+        @DisplayName("0 | requirements")
+        public void test0() {
             test()
-                .add(TRANSFORM_ARRAY_ITERATIVELY::assertParametersMatch)
-                .add(TRANSFORM_ARRAY_ITERATIVELY::assertReturnType)
+                .add(mTransformArrayIteratively()::assureResolved)
                 .run(SHOW_ALL);
+        }
+
+        @Test
+        @DisplayName("1 | Declaration")
+        public void test1() {
+            mTransformArrayIteratively().assertCorrectDeclaration();
         }
 
         @Test
         @DisplayName("3 | No Recursion")
         public void test3() {
-            TRANSFORM_ARRAY_ITERATIVELY.assertNotRecursive(2);
+            mTransformArrayIteratively().assertNotRecursive(2); // TODO
         }
 
         // Checks the array access order of method <transformArrayIteratively>
@@ -230,34 +210,29 @@ public class H3_Tests {
     @DisplayName("2 | Method <transformArrayRecursively(double[])>")
     public static class H3_2_2 {
 
-        @BeforeAll
-        public static void beforeAll() {
-            test()
-                .add(STRANGE_THINGS::assureClassResolved)
-                .add(TRANSFORM_ARRAY_RECURSIVELY::assureMethodResolved)
-                .add(TRAVERSER::assureClassResolved)
-                .run(SHOW_FIRST);
+        @BeforeEach
+        public void beforeEach() {
+            resetStrangeThingsMock();
         }
 
         @Test
-        @DisplayName("1 | Access Modifiers")
-        public void test1() {
-            TRANSFORM_ARRAY_RECURSIVELY.assertAccessModifier();
-        }
-
-        @Test
-        @DisplayName("2 | Parameter and Return Types")
-        public void test2() {
+        @DisplayName("0 | requirements")
+        public void test0() {
             test()
-                .add(TRANSFORM_ARRAY_RECURSIVELY::assertParametersMatch)
-                .add(TRANSFORM_ARRAY_RECURSIVELY::assertReturnType)
+                .add(mTransformArrayRecursively()::assureResolved)
                 .run(SHOW_ALL);
+        }
+
+        @Test
+        @DisplayName("1 | Declaration")
+        public void test1() {
+            mTransformArrayRecursively().assertCorrectDeclaration();
         }
 
         @Test
         @DisplayName("3 | No Recursion")
         public void test3() {
-            TRANSFORM_ARRAY_ITERATIVELY.assertNotRecursive(2);
+            mTransformArrayIteratively().assertNotRecursive(2);
         }
 
         // Checks the array access order of method transformArrayRecursively.
@@ -290,7 +265,7 @@ public class H3_Tests {
         @Test
         @DisplayName("6 | No Iterative Elements")
         public void test6() {
-            TRANSFORM_ARRAY_RECURSIVELY.assertConstructsNotUsed(List.of(CtForImpl.class, CtForEachImpl.class,
+            mTransformArrayRecursively().assertConstructsNotUsed(List.of(CtForImpl.class, CtForEachImpl.class,
                 CtWhileImpl.class));
         }
 
@@ -301,55 +276,49 @@ public class H3_Tests {
     @DisplayName("3 | Method <doTheRecursion(double[],double[],Traverser,int)>")
     public static class H3_2_3 {
 
-        @BeforeAll
-        public static void beforeAll() {
+        @BeforeEach
+        void beforeEach() {
+            RANDOM.setSeed(42);
+            resetStrangeThingsMock();
+        }
+
+        @Test
+        @DisplayName("0 | requirements")
+        public void test0() {
             test()
-                .add(STRANGE_THINGS::assureClassResolved)
-                .add(DO_THE_RECURSION::assureMethodResolved)
-                .add(TRAVERSER::assureClassResolved)
+                .add(mDoTheRecursion()::assureResolved)
                 .run(SHOW_ALL);
         }
 
-
         @Test
-        @DisplayName("1 | Access Modifiers")
+        @DisplayName("1 | Declaration")
         public void test1() {
-            DO_THE_RECURSION.assertAccessModifier();
-        }
-
-        @Test
-        @DisplayName("2 | Parameter and Return Types")
-        public void test2() {
-            test()
-                .add(DO_THE_RECURSION::assertParametersMatch)
-                .add(DO_THE_RECURSION::assertReturnType)
-                .run(SHOW_ALL);
+            mDoTheRecursion().assertCorrectDeclaration();
         }
 
         @Test
         @DisplayName("3 | Return Values")
         public void test3() {
-            var ignored = StrangeThings_STUD.getStrangeThingsMock();
-            {
-                range(0, T).forEach(i -> {
-                        var input = createDoubleArray(RANDOM);
-                        var inputSave = Arrays.copyOf(input, input.length);
-                        var output = createEmptyOutput(input);
-                        var outputSave = Arrays.copyOf(output, output.length);
-                        var traverser = new UpTraverser_REF();
-                        int index = 0;
-                        doTheRecursion_STUD(input, output, traverser, index);
-                        var outputRef = transformArray_REF(input);
-                        test("doTheRecursion").run(
-                            () -> assertArrayEquals(output, outputRef, incorrectReturnedObject()),
-                            Arrays.toString(inputSave),
-                            Arrays.toString(outputSave), traverser.getClass().getSimpleName(),
-                            0);
-                    }
-                );
-            }
-        }
 
+            range(0, T).forEach(i -> {
+                var input = createDoubleArray(RANDOM);
+                var inputSave = Arrays.copyOf(input, input.length);
+                var output = createEmptyOutput(input);
+                var outputSave = Arrays.copyOf(output, output.length);
+                var traverser = new UpTraverser_REF();
+                int index = 0;
+                doTheRecursion_STUD(input, output, traverser, index);
+                var outputRef = transformArray_REF(input);
+                test("doTheRecursion").run(
+                    () -> assertArrayEquals(output, outputRef, incorrectReturnedObject()),
+                    Arrays.toString(inputSave),
+                    Arrays.toString(outputSave), traverser.getClass().getSimpleName(),
+                    0);
+            });
+
+        }
     }
 
 }
+
+

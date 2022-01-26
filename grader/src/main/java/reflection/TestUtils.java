@@ -1,6 +1,8 @@
 package reflection;
 
 import com.google.common.reflect.ClassPath;
+import h.Global;
+import org.apache.logging.log4j.Level;
 import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 
 import java.io.IOException;
@@ -161,7 +163,7 @@ public class TestUtils {
         if (cycle != null) {
             // Autograder Run
             return cycle.getSubmission().getClassNames().stream()
-                .map(x -> assertDoesNotThrow(() -> Class.forName(x))).toArray(Class<?>[]::new);
+                .map(x -> assertDoesNotThrow(() -> cycle.getClassLoader().loadClass(x))).toArray(Class<?>[]::new);
         } else {
             // Regular Junit Run
             final ClassLoader loader = Thread.currentThread().getContextClassLoader();

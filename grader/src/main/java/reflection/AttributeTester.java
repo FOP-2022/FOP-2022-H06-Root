@@ -1,11 +1,16 @@
 package reflection;
 
+import tutor.Utils;
+import tutor.Utils.TestCollection;
+
 import java.lang.reflect.Field;
 import java.util.Objects;
 
 import static java.lang.reflect.Modifier.isStatic;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static reflection.TestUtils.assertModifier;
+import static tutor.Utils.TestCollection.*;
+import static tutor.Utils.TestCollection.Mode.*;
 
 public class AttributeTester {
 
@@ -37,6 +42,13 @@ public class AttributeTester {
         if (matcher.modifier >= 0) {
             assertModifier(matcher.modifier, field);
         }
+        return this;
+    }
+
+    public AttributeTester assertDeclaration() {
+        test()
+            .add(this::assertModifiers)
+            .run(SHOW_ALL);
         return this;
     }
 

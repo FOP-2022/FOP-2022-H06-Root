@@ -7,13 +7,7 @@
     {
       "name": "grader",
       "files": [
-          "h/H3_Utils.java",
-          "h/H4_Tests.java",
-          "h/H_Rubric.java",
-          "h/H3_Tests.java",
-          "h/H4_Utils.java",
-          "h/H2_Tests.java",
-          "h/Global.java",
+          "student/StrangeThings_STUD.java",
           "student/Traverser_STUD.java",
           "student/AbstractTraverser_STUD.java",
           "student/UpTraverser_STUD.java",
@@ -21,8 +15,14 @@
           "student/ReturnData_STUD.java",
           "student/RandomTraverser.java",
           "student/Main_STUD.java",
-          "student/StrangeThings_STUD.java",
           "student/AbstractArrayTraverser.java",
+          "h/H3_Utils.java",
+          "h/H4_Tests.java",
+          "h/H_Rubric.java",
+          "h/H3_Tests.java",
+          "h/H4_Utils.java",
+          "h/H2_Tests.java",
+          "h/Global.java",
           "reflection/ClassTester.java",
           "reflection/AttributeTester.java",
           "reflection/AttributeMatcher.java",
@@ -35,10 +35,12 @@
           "tutor/AbstractExpression.java",
           "tutor/Utils.java",
           "tutor/Expression.java",
+          "tutor/MyMockedStatic.java",
+          "tutor/MyTransformer.java",
+          "tutor/Verificator.java",
           "reference/UpTraverser_REF.java",
           "reference/StrangeThings_REF.java",
-          "h06/StrangeThings_Foo.java",
-          "transform/StrangeThings_Transformer.java"
+          "h06/StrangeThings_Foo.java"
       ]
     },
     {

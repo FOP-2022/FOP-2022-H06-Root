@@ -20,11 +20,16 @@ public class MyTransformer implements ClassTransformer {
         return null;
     }
 
+
     @Override
     public void transform(ClassReader reader, ClassWriter writer) {
         reader.accept(new MethodTransformer(writer), 0);
     }
 
+    @Override
+    public int getWriterFlags() {
+        return ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES;
+    }
 
     static class MethodTransformer extends ClassVisitor {
 
@@ -46,14 +51,22 @@ public class MyTransformer implements ClassTransformer {
 
 
             boolean isStatic = Modifier.isStatic(access);
-            boolean isMain = isStatic && name.equals("main");
+            boolean forceStatic = isStatic && (name.equals("main") || name.equals("<clinit>"));
             access &= ~Modifier.PRIVATE;
             access &= ~Modifier.PROTECTED;
             access |= Modifier.PUBLIC;
 
-            if (isStatic && !isMain) {
+            if (isStatic && !forceStatic) {
                 final int modifiedAccess = access ^ Modifier.STATIC;
                 var mv = new MethodVisitor(Opcodes.ASM9, super.visitMethod(modifiedAccess, name, descriptor, signature, exceptions)) {
+
+
+                    @Override
+                    public void visitIincInsn(int var, int increment) {
+                        var += 1;
+                        maxVar = Math.max(maxVar, var);
+                        super.visitIincInsn(var, increment);
+                    }
 
                     @Override
                     public void visitVarInsn(int opcode, int var) {
@@ -94,12 +107,12 @@ public class MyTransformer implements ClassTransformer {
                     visitor.visitVarInsn(Opcodes.ISTORE, start++);
                 } else if (type == Type.LONG_TYPE) {
                     visitor.visitVarInsn(Opcodes.LSTORE, start++);
-                    start++;
+                    //start++;
                 } else if (type == Type.FLOAT_TYPE) {
                     visitor.visitVarInsn(Opcodes.FSTORE, start++);
                 } else if (type == Type.DOUBLE_TYPE) {
                     visitor.visitVarInsn(Opcodes.DSTORE, start++);
-                    start++;
+                    //start++;
                 } else {
                     visitor.visitVarInsn(Opcodes.ASTORE, start++);
                 }
@@ -115,12 +128,12 @@ public class MyTransformer implements ClassTransformer {
                     visitor.visitVarInsn(Opcodes.ILOAD, start--);
                 } else if (type == Type.LONG_TYPE) {
                     visitor.visitVarInsn(Opcodes.LLOAD, start--);
-                    start--;
+                    //start--;
                 } else if (type == Type.FLOAT_TYPE) {
                     visitor.visitVarInsn(Opcodes.FLOAD, start--);
                 } else if (type == Type.DOUBLE_TYPE) {
                     visitor.visitVarInsn(Opcodes.DLOAD, start--);
-                    start--;
+                    //start--;
                 } else {
                     visitor.visitVarInsn(Opcodes.ALOAD, start--);
                 }

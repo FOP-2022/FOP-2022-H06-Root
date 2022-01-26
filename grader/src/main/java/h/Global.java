@@ -12,7 +12,7 @@ public interface Global {
     Random RANDOM = new Random(42);
     double SIMILARITY = 0.8;
     int T = 10;
-    Logger LOGGER = LogManager.getLogger("Global");
+    //Logger LOGGER = LogManager.getLogger("Global");
     MyTransformer TRANSFORMER = new MyTransformer();
     State MODE = new State();
 

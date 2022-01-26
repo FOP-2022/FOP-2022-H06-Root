@@ -7,6 +7,7 @@ import org.sourcegrade.jagr.api.testing.SourceFile;
 import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 import spoon.Launcher;
 import spoon.support.compiler.VirtualFile;
+import tutor.Utils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -575,7 +576,7 @@ public class ClassTester<T> {
     }
 
     public ClassTester<T> assureSpoonLauncherModelsBuild() {
-        assureClassResolved();
+        assureResolved();
         if (spoon == null) {
             spoon = new Launcher();
         }
@@ -952,9 +953,10 @@ public class ClassTester<T> {
      * Asserts that the Access Modifier is correct, with propper Fail Message
      */
     public void assertAccessModifier() {
-        if (accessModifier >= 0) {
-            TestUtils.assertModifier(accessModifier, theClass);
-        }
+//        disabled for this submbission
+//        if (accessModifier >= 0) {
+//            TestUtils.assertModifier(accessModifier, theClass);
+//        }
     }
 
     /**
@@ -971,8 +973,8 @@ public class ClassTester<T> {
      *
      * @param classInstance the new Class Instance
      */
-    public void setClassInstance(T classInstance) {
-        this.classInstance = classInstance;
+    public void setClassInstance(Object classInstance) {
+        this.classInstance = (T) classInstance;
     }
 
     /**
@@ -1055,8 +1057,9 @@ public class ClassTester<T> {
             .findFirst().orElse(null);
         var sim = TestUtils.similarity(bestMatch.getSimpleName(), className);
         assertNotNull(bestMatch, getClassNotFoundMessage());
-        if (sim < similarity)
+        if (sim < similarity) {
             fail(String.format("class <%s> not found", className));
+        }
         return theClass = (Class<T>) bestMatch;
     }
 
@@ -1095,7 +1098,8 @@ public class ClassTester<T> {
      *
      * @return this
      */
-    public ClassTester<T> assureClassResolved() {
+    public ClassTester<T> assureResolved() {
+
         if (!class_resolved()) {
             resolveClass();
         }
@@ -1109,7 +1113,7 @@ public class ClassTester<T> {
      * @return this
      */
     public ClassTester<T> resolve() {
-        assureClassResolved();
+        assureResolved();
         resolveInstance();
         return this;
     }
@@ -1121,7 +1125,7 @@ public class ClassTester<T> {
      * @return this
      */
     public ClassTester<T> resolveReal() {
-        assureClassResolved();
+        assureResolved();
         resolveRealInstance();
         return this;
     }
@@ -1133,7 +1137,7 @@ public class ClassTester<T> {
      * @return this
      */
     public ClassTester<T> resolveStatic() {
-        assureClassResolved();
+        assureResolved();
         resolveStaticInstance();
         return this;
     }
@@ -1311,7 +1315,6 @@ public class ClassTester<T> {
     }
 
 
-
     /**
      * Asserts that a given field has a certain value
      *
@@ -1383,6 +1386,12 @@ public class ClassTester<T> {
      */
     public void assertIsPlainClass() {
         assertIsPlainClass(theClass, classIdentifier.identifierName);
+    }
+
+    public void assertCorrectDeclaration() {
+        Utils.TestCollection.test()
+            .add(this::assertAccessModifier)
+            .run();
     }
 
 }

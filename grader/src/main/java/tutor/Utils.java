@@ -1,25 +1,36 @@
 package tutor;
 
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.opentest4j.AssertionFailedError;
 import spoon.reflect.code.CtCodeElement;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import tutor.Utils.TestCollection.Entry;
 
-import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.mockStatic;
 import static tutor.Utils.TestCollection.Mode.SILENT;
 
 
 public interface Utils {
+
+    public interface Test {
+
+        static void a() {
+            b();
+        }
+
+        static void b() {
+
+        }
+
+    }
 
     static <T> Iterable<T> iterate(Stream<T> s) {
         return s::iterator;
@@ -136,6 +147,7 @@ public interface Utils {
 
         public final String methodName;
         final LinkedList<Entry> entries = new LinkedList<>();
+
         private TestCollection(String methodName) {
             this.methodName = methodName;
         }
@@ -208,6 +220,7 @@ public interface Utils {
                 fail(getEntriesToShow().map(Messages::ofEntryError).collect(Collectors.joining(", ")));
             }
             entries.clear();
+
             return null;
         }
 
@@ -252,6 +265,10 @@ public interface Utils {
     class State {
         private Object state = 0;
 
+        public <T> boolean is(T toCompare) {
+            return Objects.equals(toCompare, state);
+        }
+
         public <T> T get() {
             return (T) state;
         }
@@ -270,14 +287,4 @@ public interface Utils {
         }
     }
 
-    interface MockitoUtils {
-        static MockedStatic<?> mockUseDefaultAnswer(Class<?> clazz, Method... methodsTomock) {
-            List<Method> methods = List.of(methodsTomock);
-            return mockStatic(clazz, a -> {
-                if (methods.contains(a.getMethod()))
-                    return null;
-                return a.callRealMethod();
-            });
-        }
-    }
 }
