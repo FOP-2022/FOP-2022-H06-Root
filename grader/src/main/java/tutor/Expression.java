@@ -73,6 +73,4 @@ public class Expression extends AbstractExpression {
         l.addAll(e2.getCharacterList());
         return l;
     }
-
-
 }

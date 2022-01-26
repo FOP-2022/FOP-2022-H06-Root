@@ -51,7 +51,7 @@ public class H3_Tests {
     @TestForSubmission("h06")
     @Nested
     @DisplayName("1 | Interface <Traverser>")
-    public static class H3_1_1 {
+    public class H3_1_1 {
 
         @Test
         @DisplayName("0 | requirements")
@@ -71,7 +71,7 @@ public class H3_Tests {
     @TestForSubmission("h06")
     @Nested
     @DisplayName("2 | Class <UpTraverser>")
-    public static class H3_1_2 {
+    public class H3_1_2 {
 
         @Test
         @DisplayName("0 | requirements")
@@ -109,13 +109,12 @@ public class H3_Tests {
                     index)));
             }
         }
-
     }
 
     @TestForSubmission("h06")
     @Nested
     @DisplayName("3 | Class <DownTraverser>")
-    public static class H3_1_3 {
+    public class H3_1_3 {
 
         @Test
         @DisplayName("0 | requirements")
@@ -153,7 +152,6 @@ public class H3_Tests {
                     , index)));
             }
         }
-
     }
 
     @TestForSubmission("h06")
@@ -215,14 +213,12 @@ public class H3_Tests {
                     "using reference implementation of <UpTraverser>"));
             }
         }
-
-
     }
 
     @TestForSubmission("h06")
     @Nested
     @DisplayName("2 | Method <transformArrayRecursively(double[])>")
-    public static class H3_2_2 {
+    public class H3_2_2 {
 
         @BeforeEach
         public void beforeEach() {
@@ -282,13 +278,12 @@ public class H3_Tests {
             mTransformArrayRecursively().assertConstructsNotUsed(List.of(CtForImpl.class, CtForEachImpl.class,
                 CtWhileImpl.class));
         }
-
     }
 
     @TestForSubmission("h06")
     @Nested
     @DisplayName("3 | Method <doTheRecursion(double[],double[],Traverser,int)>")
-    public static class H3_2_3 {
+    public class H3_2_3 {
 
         @BeforeEach
         void beforeEach() {
@@ -313,7 +308,6 @@ public class H3_Tests {
         @Test
         @DisplayName("3 | Return Values")
         public void test3() {
-
             range(0, T).forEach(i -> {
                 var input = createDoubleArray(RANDOM);
                 var inputSave = Arrays.copyOf(input, input.length);
@@ -329,10 +323,6 @@ public class H3_Tests {
                     Arrays.toString(outputSave), traverser.getClass().getSimpleName(),
                     0);
             });
-
         }
     }
-
 }
-
-

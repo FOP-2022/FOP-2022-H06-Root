@@ -56,5 +56,4 @@ public abstract class Traverser_STUD implements Mocked {
     public abstract int getFirstIndex(double[] array);
 
     public abstract int getNextIndex(int index);
-
 }

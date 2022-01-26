@@ -25,7 +25,6 @@ public class MyTransformer implements ClassTransformer {
         return null;
     }
 
-
     @Override
     public void transform(ClassReader reader, ClassWriter writer) {
         reader.accept(new MethodTransformer(writer), 0);
@@ -54,7 +53,6 @@ public class MyTransformer implements ClassTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
 
-
             boolean isStatic = Modifier.isStatic(access);
             boolean forceStatic = isStatic && (name.equals("main") || name.equals("<clinit>"));
             access &= ~Modifier.PRIVATE;
@@ -64,7 +62,6 @@ public class MyTransformer implements ClassTransformer {
             if (isStatic && !forceStatic) {
                 final int modifiedAccess = access ^ Modifier.STATIC;
                 var mv = new MethodVisitor(Opcodes.ASM9, super.visitMethod(modifiedAccess, name, descriptor, signature, exceptions)) {
-
 
                     @Override
                     public void visitIincInsn(int var, int increment) {
@@ -99,7 +96,6 @@ public class MyTransformer implements ClassTransformer {
             }
             return super.visitMethod(access, name, descriptor, signature, exceptions);
         }
-
     }
 
     interface ByteUtils {
@@ -121,7 +117,6 @@ public class MyTransformer implements ClassTransformer {
                 } else {
                     visitor.visitVarInsn(Opcodes.ASTORE, start++);
                 }
-
             }
             return start - 1;
         }
@@ -146,7 +141,5 @@ public class MyTransformer implements ClassTransformer {
             }
             return start + 1;
         }
-
     }
-
 }

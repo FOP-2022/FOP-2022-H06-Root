@@ -48,5 +48,4 @@ public class StrangeThings_REF {
         }
         return null;
     }
-
 }

@@ -54,7 +54,7 @@ public class H4_Tests {
     @Nested
     @TestForSubmission("h06")
     @DisplayName("H4.1 | class <ReturnData>")
-    public static class H4_1 {
+    public class H4_1 {
 
         @BeforeEach
         void beforeEach() {
@@ -87,12 +87,11 @@ public class H4_Tests {
         public void test3() {
             aNextIndex().assertDeclaration();
         }
-
     }
 
     @Nested
     @TestForSubmission("h06")
-    public static class H4_2 {
+    public class H4_2 {
 
         @BeforeEach
         public void beforeEach() {
@@ -137,7 +136,6 @@ public class H4_Tests {
             if (lastArray.get() == null) {
                 fail("no call");
             }
-
         }
 
         @Test
@@ -150,18 +148,16 @@ public class H4_Tests {
         @Test
         @DisplayName("4 | no recursive call for atomic sub-expression")
         public void test4() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
-                    for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
-                        State state = new State();
-                        getEvaluateRecursively().invoke(doAnswer(a -> {
-                            if (state.incInt() == 0) {
-                                return a.callRealMethod();
-                            }
-                            return test("evaluateRecursively").run(() -> fail(unexpectedCall()), e, se.startIndex());
-                        }).when(getStrangeThingsMock()), any(char[].class), anyInt());
-                        evaluateRecursively_STUD(e.characters(), se.startIndex());
-                    }
+            for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
+                for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
+                    State state = new State();
+                    getEvaluateRecursively().invoke(doAnswer(a -> {
+                        if (state.incInt() == 0) {
+                            return a.callRealMethod();
+                        }
+                        return test("evaluateRecursively").run(() -> fail(unexpectedCall()), e, se.startIndex());
+                    }).when(getStrangeThingsMock()), any(char[].class), anyInt());
+                    evaluateRecursively_STUD(e.characters(), se.startIndex());
                 }
             }
         }
@@ -170,15 +166,13 @@ public class H4_Tests {
         @Test
         @DisplayName("5 | returned values for atomic sub-expression")
         public void test5() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
-                    for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
-                        ReturnData_STUD d = evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        test("evaluateRecursively")
-                            .add(() -> assertEquals(se.nextIndex(), d.getNextIndex(), incorrectAttribute("nextIndex")), e, se.startIndex())
-                            .add(() -> assertEquals(se.getValue(), d.getResult(), incorrectAttribute("result")), e, se.startIndex())
-                            .run(SHOW_FIRST);
-                    }
+            for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
+                for (AbstractExpression se : iterate(e.stream().filter(ATOMAR))) {
+                    ReturnData_STUD d = evaluateRecursively_STUD(e.characters(), se.startIndex());
+                    test("evaluateRecursively")
+                        .add(() -> assertEquals(se.nextIndex(), d.getNextIndex(), incorrectAttribute("nextIndex")), e, se.startIndex())
+                        .add(() -> assertEquals(se.getValue(), d.getResult(), incorrectAttribute("result")), e, se.startIndex())
+                        .run(SHOW_FIRST);
                 }
             }
         }
@@ -187,25 +181,23 @@ public class H4_Tests {
         @Test
         @DisplayName("7 | 1st recursive call for 1st non-atomic sub-expressions")
         public void test7() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
-                    for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
-                        var state = new State();
-                        getEvaluateRecursively().invoke(doAnswer(a -> {
-                            int index = a.getArgument(1);
-                            state.incInt();
-                            if (state.getInt() == 1) {
-                                return a.callRealMethod();
-                            } else if (state.getInt() == 2) { // recursive call 1
-                                test("evaluateRecursively")
-                                    .run(() -> assertEquals(se.expression1().startIndex, index, incorrect("index of first call")), e, se.startIndex());
-                            }
-                            return e.evaluate(index).getActualObject();
-                        }).when(getStrangeThingsMock()), any(char[].class), anyInt());
-                        evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        if (state.getInt() < 2) {
-                            fail("missing call");
+            for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
+                for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
+                    var state = new State();
+                    getEvaluateRecursively().invoke(doAnswer(a -> {
+                        int index = a.getArgument(1);
+                        state.incInt();
+                        if (state.getInt() == 1) {
+                            return a.callRealMethod();
+                        } else if (state.getInt() == 2) { // recursive call 1
+                            test("evaluateRecursively")
+                                .run(() -> assertEquals(se.expression1().startIndex, index, incorrect("index of first call")), e, se.startIndex());
                         }
+                        return e.evaluate(index).getActualObject();
+                    }).when(getStrangeThingsMock()), any(char[].class), anyInt());
+                    evaluateRecursively_STUD(e.characters(), se.startIndex());
+                    if (state.getInt() < 2) {
+                        fail("missing call");
                     }
                 }
             }
@@ -215,25 +207,23 @@ public class H4_Tests {
         @Test
         @DisplayName("8 | 2nd recursive call for 2nd non-atomic sub-expressions")
         public void test8() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
-                    for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
-                        var state = new State();
-                        getEvaluateRecursively().invoke(doAnswer(a -> {
-                            int index = a.getArgument(1);
-                            state.incInt();
-                            if (state.getInt() == 1) {
-                                return a.callRealMethod();
-                            } else if (state.getInt() == 3) { // recursive call 2
-                                test("evaluateRecursively").add(() -> assertEquals(se.expression2().startIndex, index, incorrect("index of second call")), e, se.startIndex()).run();
-                                return se.evaluate().getActualObject();
-                            }
-                            return e.evaluate(index).getActualObject();
-                        }).when(getStrangeThingsMock()), any(char[].class), anyInt());
-                        evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        if (state.getInt() < 3) {
-                            fail("missing call");
+            for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
+                for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
+                    var state = new State();
+                    getEvaluateRecursively().invoke(doAnswer(a -> {
+                        int index = a.getArgument(1);
+                        state.incInt();
+                        if (state.getInt() == 1) {
+                            return a.callRealMethod();
+                        } else if (state.getInt() == 3) { // recursive call 2
+                            test("evaluateRecursively").add(() -> assertEquals(se.expression2().startIndex, index, incorrect("index of second call")), e, se.startIndex()).run();
+                            return se.evaluate().getActualObject();
                         }
+                        return e.evaluate(index).getActualObject();
+                    }).when(getStrangeThingsMock()), any(char[].class), anyInt());
+                    evaluateRecursively_STUD(e.characters(), se.startIndex());
+                    if (state.getInt() < 3) {
+                        fail("missing call");
                     }
                 }
             }
@@ -243,25 +233,23 @@ public class H4_Tests {
         @Test
         @DisplayName("9 | returned value for non-atomic sub-expression")
         public void test9() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
-                    for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
-                        var state = new State();
-                        getEvaluateRecursively().invoke(doAnswer(a -> {
-                            int index = a.getArgument(1);
-                            state.incInt();
-                            if (state.getInt() == 1) {
-                                return a.callRealMethod();
-                            }
-                            return se.evaluate(index).getActualObject();
-                        }).when(getStrangeThingsMock()), any(char[].class), anyInt());
-                        var expected = se.evaluate();
-                        var actual = evaluateRecursively_STUD(e.characters(), se.startIndex());
-                        test("evaluateRecursively")
-                            .add(() -> assertEquals(expected.getResult(), actual.getResult(), Utils.Messages.incorrectAttribute("result")), e, se.startIndex())
-                            .add(() -> assertEquals(expected.getNextIndex(), actual.getNextIndex(), Utils.Messages.incorrectAttribute("nextIndex")), e, se.startIndex())
-                            .run();
-                    }
+            for (AbstractExpression e : iterate(expressions(RANDOM).filter(NON_ATOMAR).limit(T).sorted())) {
+                for (Expression se : iterate(e.stream().filter(NON_ATOMAR).map(TO_NON_ATOMAR))) {
+                    var state = new State();
+                    getEvaluateRecursively().invoke(doAnswer(a -> {
+                        int index = a.getArgument(1);
+                        state.incInt();
+                        if (state.getInt() == 1) {
+                            return a.callRealMethod();
+                        }
+                        return se.evaluate(index).getActualObject();
+                    }).when(getStrangeThingsMock()), any(char[].class), anyInt());
+                    var expected = se.evaluate();
+                    var actual = evaluateRecursively_STUD(e.characters(), se.startIndex());
+                    test("evaluateRecursively")
+                        .add(() -> assertEquals(expected.getResult(), actual.getResult(), Utils.Messages.incorrectAttribute("result")), e, se.startIndex())
+                        .add(() -> assertEquals(expected.getNextIndex(), actual.getNextIndex(), Utils.Messages.incorrectAttribute("nextIndex")), e, se.startIndex())
+                        .run();
                 }
             }
         }
@@ -271,22 +259,20 @@ public class H4_Tests {
         @Test
         @DisplayName("10 | returned values (including atomic expressions)")
         public void test10() {
-            {
-                for (AbstractExpression e : iterate(expressions(RANDOM).limit(100).sorted())) {
-                    var expected = e.evaluate();
-                    var actual = evaluateRecursively_STUD(e.characters(), 0);
-                    test("evaluateRecursively")
-                        .add(() -> assertEquals(expected.getResult(), actual.getResult(), Utils.Messages.incorrectAttribute("result")), e, 0)
-                        .add(() -> assertEquals(expected.getNextIndex(), actual.getNextIndex(), Utils.Messages.incorrectAttribute("nextIndex")), e, 0)
-                        .run();
-                }
+            for (AbstractExpression e : iterate(expressions(RANDOM).limit(100).sorted())) {
+                var expected = e.evaluate();
+                var actual = evaluateRecursively_STUD(e.characters(), 0);
+                test("evaluateRecursively")
+                    .add(() -> assertEquals(expected.getResult(), actual.getResult(), Utils.Messages.incorrectAttribute("result")), e, 0)
+                    .add(() -> assertEquals(expected.getNextIndex(), actual.getNextIndex(), Utils.Messages.incorrectAttribute("nextIndex")), e, 0)
+                    .run();
             }
         }
     }
 
     @Nested
     @TestForSubmission("h06")
-    public static class H_4_3 {
+    public class H_4_3 {
 
         @BeforeEach
         void beforeEach() {
@@ -327,7 +313,6 @@ public class H4_Tests {
 //            main_STUD();
 //            if (counter.getInt() < 5)
 //                assertEquals(5, counter.getInt(), "too few tests of this type");
-
         }
 
         @Test
@@ -347,6 +332,5 @@ public class H4_Tests {
 //            if (counter.getInt() < 5)
 //                assertEquals(5, counter.getInt(), "too few tests of this type");
         }
-
     }
 }

@@ -13,6 +13,4 @@ public interface Global {
     //Logger LOGGER = LogManager.getLogger("Global");
     MyTransformer TRANSFORMER = new MyTransformer();
     State MODE = new State();
-
-
 }

@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 
 public class H4_Utils {
 
-
     public static final Predicate<AbstractExpression> PREDICATE = e -> e.getCharacterList().size() <= 20;
 
     public static AbstractExpression getExpression(Random r) {
@@ -32,11 +31,9 @@ public class H4_Utils {
     }
 
     public interface ExpressionStreams {
-
         static Stream<AbstractExpression> expressions(Random r) {
             return Stream.generate(() -> getExpression(r)).filter(PREDICATE);
         }
-
     }
 
     public interface CharacterStreams {
@@ -63,27 +60,20 @@ public class H4_Utils {
     }
 
     public interface CharacterPredicates {
-
         Predicate<Character> IS_DIGIT = Character::isDigit;
         Predicate<Character> IS_OPERATOR = c -> c == '-';
-
     }
 
     public interface ExpressionPredicates {
-
         Predicate<AbstractExpression> ATOMAR = e -> e instanceof AtomarExpression;
         Predicate<AbstractExpression> NON_ATOMAR = ATOMAR.negate();
-
     }
 
     public interface ExpressionMappings {
-
         Function<AbstractExpression, Expression> TO_NON_ATOMAR = e -> (Expression) e;
-
     }
 
     public interface ExpressionCollectors {
-
         static <A extends Comparable<? super A>> Collector<A, ?, List<A>> toSortedList() {
             return Collector.of(
                 () -> new LinkedList<A>(),
@@ -94,10 +84,6 @@ public class H4_Utils {
                     return l;
                 }
             );
-
         }
-
     }
-
-
 }

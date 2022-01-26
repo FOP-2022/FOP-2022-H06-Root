@@ -50,5 +50,4 @@ public class RandomTraverser extends AbstractArrayTraverser {
         }
         return map.get(index);
     }
-
 }

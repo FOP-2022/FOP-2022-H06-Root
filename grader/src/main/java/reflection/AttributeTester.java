@@ -15,7 +15,6 @@ public class AttributeTester {
     private AttributeMatcher matcher;
     private Field field;
 
-
     public AttributeTester setMatcher(AttributeMatcher matcher) {
         this.matcher = matcher;
         return this;
@@ -66,5 +65,4 @@ public class AttributeTester {
         assureAccessible(object);
         assertDoesNotThrow(() -> field.set(object, value));
     }
-
 }

@@ -42,5 +42,4 @@ public abstract class AbstractArrayTraverser extends AbstractTraverser_STUD {
             .map(e -> e.index)
             .collect(Collectors.toList());
     }
-
 }

@@ -36,6 +36,4 @@ public class Main_STUD {
     public static void main_STUD() {
         mMain().invokeStatic((Object) new String[0]);
     }
-
-
 }

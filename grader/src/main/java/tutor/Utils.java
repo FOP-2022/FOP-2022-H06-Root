@@ -269,7 +269,6 @@ public interface Utils {
                 return newType;
             }
         }
-
     }
 
     class State {
@@ -296,5 +295,4 @@ public interface Utils {
             this.state = state;
         }
     }
-
 }

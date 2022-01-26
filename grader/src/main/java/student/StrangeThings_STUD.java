@@ -264,5 +264,4 @@ public class StrangeThings_STUD {
     public static OngoingStubbing<?> evaluateRecursively_STUD() {
         return Mockito.when(getEvaluateRecursively().invoke(getStrangeThingsMock(), any(char[].class), anyInt()));
     }
-
 }

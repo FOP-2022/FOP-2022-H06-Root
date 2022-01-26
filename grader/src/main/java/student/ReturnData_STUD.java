@@ -88,6 +88,4 @@ public class ReturnData_STUD implements Mocked {
     Object getActualObject() {
         return object;
     }
-
-
 }

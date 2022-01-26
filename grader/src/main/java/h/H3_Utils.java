@@ -15,5 +15,4 @@ public interface H3_Utils {
     static double[] createEmptyOutput(double[] input) {
         return new double[input.length];
     }
-
 }
