@@ -4,10 +4,8 @@ repositories {
 }
 
 dependencies {
-    // compileOnly("org.sourcegrade:jagr-launcher:0.3.0")
-    compileOnly(files("jagr-launcher-0.4.0-SNAPSHOT.jar"))
-    // compileOnly("org.sourcegrade:jagr-grader-api:0.3")
-    compileOnly(files("libs/jagr-grader-api-0.4-SNAPSHOT.jar"))
+    compileOnly("org.sourcegrade:jagr-launcher:0.4.0-SNAPSHOT")
+    compileOnly("org.sourcegrade:jagr-grader-api:0.4-SNAPSHOT")
     compileOnly("org.ow2.asm:asm:9.2")
     implementation("org.mockito:mockito-inline:4.2.1-SNAPSHOT")
     implementation("org.powermock:powermock-api-mockito2:2.0.9")
