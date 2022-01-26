@@ -4,7 +4,7 @@ plugins {
 }
 allprojects {
     apply(plugin = "java")
-    // apply(plugin = "org.sourcegrade.style")
+    apply(plugin = "org.sourcegrade.style")
     repositories {
         mavenLocal()
         mavenCentral()
