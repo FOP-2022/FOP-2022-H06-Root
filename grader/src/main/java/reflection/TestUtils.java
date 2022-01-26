@@ -1,8 +1,6 @@
 package reflection;
 
 import com.google.common.reflect.ClassPath;
-import h.Global;
-import org.apache.logging.log4j.Level;
 import org.sourcegrade.jagr.api.testing.extension.TestCycleResolver;
 
 import java.io.IOException;

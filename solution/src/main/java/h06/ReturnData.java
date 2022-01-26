@@ -17,9 +17,9 @@ public class ReturnData {
 
     @Override
     public String toString() {
-        return "ReturnData{" +
-            "result=" + result +
-            ", nextIndex=" + nextIndex +
-            '}';
+        return "ReturnData{"
+            + "result=" + result
+            + ", nextIndex=" + nextIndex
+            + '}';
     }
 }

@@ -16,6 +16,7 @@ import static org.mockito.Mockito.mock;
 public class UpTraverser_STUD extends Traverser_STUD {
 
     private static ClassTester<?> cUpTraverserO;
+
     public static ClassTester<?> cUpTraverser() {
         return cUpTraverserO = requireNonNullElseGet(cUpTraverserO, () -> new ClassTester<>(
             "h06",
@@ -25,6 +26,7 @@ public class UpTraverser_STUD extends Traverser_STUD {
     }
 
     private static MethodTester mGetFirstIndexO;
+
     public static MethodTester mGetFirstIndexS() {
         return mGetFirstIndexO = requireNonNullElseGet(mGetFirstIndexO, () -> new MethodTester(
             cUpTraverser(),
@@ -37,6 +39,7 @@ public class UpTraverser_STUD extends Traverser_STUD {
     }
 
     private static MethodTester mGetNextIndexO;
+
     public static MethodTester mGetNextIndexS() {
         return mGetNextIndexO = requireNonNullElseGet(mGetNextIndexO, () -> new MethodTester(
             cUpTraverser(),

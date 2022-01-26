@@ -1,7 +1,5 @@
 package reflection;
 
-import h.Global;
-import org.apache.logging.log4j.Level;
 import org.mockito.invocation.Invocation;
 import spoon.Launcher;
 import spoon.reflect.code.CtCodeElement;
@@ -21,7 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static tutor.Utils.Messages.wasNotCalledRecursively;
 import static tutor.Utils.TestCollection.test;
 
@@ -75,7 +79,11 @@ public class MethodTester {
      * @param parameters     The expected parameters
      */
     public MethodTester(ClassTester<?> classTester, String methodName, double similarity, int accessModifier, Class<?> returnType, List<ParameterMatcher> parameters, boolean allowSuperClass) {
-        this.classTester = classTester; this.methodIdentifier = new IdentifierMatcher(methodName, similarity); this.accessModifier = accessModifier; this.returnType = returnType; this.parameters = new ArrayList<>(parameters);
+        this.classTester = classTester;
+        this.methodIdentifier = new IdentifierMatcher(methodName, similarity);
+        this.accessModifier = accessModifier;
+        this.returnType = returnType;
+        this.parameters = new ArrayList<>(parameters);
         this.allowSuperClass = allowSuperClass;
     }
 
@@ -106,7 +114,8 @@ public class MethodTester {
      * @param looseReturnTypeChecking whether or not to allow Derived return Types
      */
     public MethodTester(ClassTester<?> classTester, String methodName, double similarity, int accessModifier, Class<?> returnType, ArrayList<ParameterMatcher> parameters, boolean allowSuperClass, boolean looseReturnTypeChecking) {
-        this(classTester, methodName, similarity, accessModifier, returnType, parameters, allowSuperClass); this.looseReturnTypeChecking = looseReturnTypeChecking;
+        this(classTester, methodName, similarity, accessModifier, returnType, parameters, allowSuperClass);
+        this.looseReturnTypeChecking = looseReturnTypeChecking;
     }
 
     /**
@@ -197,15 +206,21 @@ public class MethodTester {
      * @return the Amount of matching Parameters
      */
     public static int countMatchingParameters(ArrayList<ParameterMatcher> expectedParametes, ArrayList<Parameter> actualParameters, boolean ignoreNames) {
-        int count = 0; for (int i = 0; i < expectedParametes.size(); i++) {
-            var matcher = expectedParametes.get(i); var param = actualParameters.get(i); if (param.getType() != matcher.parameterType) {
+        int count = 0;
+        for (int i = 0; i < expectedParametes.size(); i++) {
+            var matcher = expectedParametes.get(i);
+            var param = actualParameters.get(i);
+            if (param.getType() != matcher.parameterType) {
                 continue;
-            } if (!ignoreNames && matcher.identifierName != null && matcher.similarity > 0) {
+            }
+            if (!ignoreNames && matcher.identifierName != null && matcher.similarity > 0) {
                 if (TestUtils.similarity(matcher.identifierName, param.getName()) < matcher.similarity) {
                     continue;
                 }
-            } count++;
-        } return count;
+            }
+            count++;
+        }
+        return count;
     }
 
     /**
@@ -218,9 +233,11 @@ public class MethodTester {
      * @return the Amount of matching Parameters
      */
     public static int countMatchingParameters(Method m, String methodName, ArrayList<ParameterMatcher> parameters, boolean ignoreNames) {
-        assertMethodNotNull(m, methodName); if (parameters == null || parameters.isEmpty()) {
+        assertMethodNotNull(m, methodName);
+        if (parameters == null || parameters.isEmpty()) {
             return 0;
-        } return countMatchingParameters(parameters, new ArrayList<>(List.of(m.getParameters())), ignoreNames);
+        }
+        return countMatchingParameters(parameters, new ArrayList<>(List.of(m.getParameters())), ignoreNames);
     }
 
 
@@ -237,12 +254,16 @@ public class MethodTester {
             assertTrue(actualParamters == null || actualParamters.isEmpty(), "Es sollen keine Parameter vorhanden sein.");
         } else {
             for (int i = 0; i < expectedParameters.size(); i++) {
-                var matcher = expectedParameters.get(i); assertTrue(i < actualParamters.size(), "Zu wenige Parameter."); var param = actualParamters.get(i);
+                var matcher = expectedParameters.get(i);
+                assertTrue(i < actualParamters.size(), "Zu wenige Parameter.");
+                var param = actualParamters.get(i);
                 // TODO fix assertions for sub-types
-                assertSame(matcher.parameterType, param.getType(), "Falscher Parametertyp an Index " + "i."); if (!ignoreNames && param.isNamePresent() && matcher.identifierName != null && matcher.similarity > 0) {
+                assertSame(matcher.parameterType, param.getType(), "Falscher Parametertyp an Index " + "i.");
+                if (!ignoreNames && param.isNamePresent() && matcher.identifierName != null && matcher.similarity > 0) {
                     assertTrue(TestUtils.similarity(matcher.identifierName, param.getName()) >= matcher.similarity, "Falscher Parametername. Erwartet: " + matcher.identifierName + ", Erhalten: " + param.getName());
                 }
-            } assertEquals(actualParamters.size(), expectedParameters.size(), "Die folgenden Parameter waren nicht gefrdert:" + actualParamters.subList(expectedParameters.size(), actualParamters.size()));
+            }
+            assertEquals(actualParamters.size(), expectedParameters.size(), "Die folgenden Parameter waren nicht gefrdert:" + actualParamters.subList(expectedParameters.size(), actualParamters.size()));
         }
     }
 
@@ -255,7 +276,8 @@ public class MethodTester {
      * @param ignoreNames whether to ignore Parameter Names
      */
     public static void assertParametersMatch(Method m, String methodName, ArrayList<ParameterMatcher> parameters, boolean ignoreNames) {
-        assertMethodNotNull(m, methodName); assertParametersMatch(parameters, new ArrayList<>(List.of(m.getParameters())), ignoreNames);
+        assertMethodNotNull(m, methodName);
+        assertParametersMatch(parameters, new ArrayList<>(List.of(m.getParameters())), ignoreNames);
     }
 
     /**
@@ -269,7 +291,8 @@ public class MethodTester {
     }
 
     public void assertCorrectDeclaration() {
-        assertMethodResolved(); test().add(() -> assertParametersMatch()).add(() -> assertReturnType()).add(() -> assertAccessModifier()).run();
+        assertMethodResolved();
+        test().add(() -> assertParametersMatch()).add(() -> assertReturnType()).add(() -> assertAccessModifier()).run();
     }
 
     /**
@@ -294,13 +317,15 @@ public class MethodTester {
     }
 
     public static String safeArrayToString(Object... array) {
-        var paramsString = "[]"; if (array != null) {
+        var paramsString = "[]";
+        if (array != null) {
             try {
                 paramsString = Arrays.toString(array);
             } catch (Exception e) {
                 Arrays.stream(array).map(x -> x.getClass().getName() + "@" + Integer.toHexString(x.hashCode())).collect(Collectors.joining(", ", "[", "]"));
             }
-        } return paramsString;
+        }
+        return paramsString;
     }
 
     /**
@@ -331,13 +356,17 @@ public class MethodTester {
     }
 
     public static boolean isRecursive(List<CtElement> elements, CtMethod<?> methodToCall, int level) {
-        if (level <= 0) return false; for (var e : elements) {
+        if (level <= 0) return false;
+        for (var e : elements) {
             if (e instanceof CtInvocation<?>) {
-                var method = (CtInvocation<?>) e; if (method.getExecutable().equals(methodToCall.getReference())) return true; if (isRecursive(e.getDirectChildren(), methodToCall, level - 1)) return true;
+                var method = (CtInvocation<?>) e;
+                if (method.getExecutable().equals(methodToCall.getReference())) return true;
+                if (isRecursive(e.getDirectChildren(), methodToCall, level - 1)) return true;
             } else if (isRecursive(e.getDirectChildren(), methodToCall, level)) {
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 
     /**
@@ -414,7 +443,9 @@ public class MethodTester {
     public void assertReturnType() {
         if (returnType == null) {
             throw new RuntimeErrorException(new Error(), "Faulty Test: Cannot assert return type null");
-        } assertMethodResolved(); if (looseReturnTypeChecking) {
+        }
+        assertMethodResolved();
+        if (looseReturnTypeChecking) {
             assertInstanceOf(returnType, theMethod.getReturnType(), getInvalidReturnTypeMessage(methodIdentifier.identifierName));
         } else {
             assertSame(returnType, theMethod.getReturnType(), getInvalidReturnTypeMessage(methodIdentifier.identifierName));
@@ -429,9 +460,13 @@ public class MethodTester {
     public MethodTester verify() {
         if (!methodResolved()) {
             resolveMethod();
-        } if (accessModifier >= 0) {
+        }
+        if (accessModifier >= 0) {
             assertAccessModifier();
-        } assertParametersMatch(); assertReturnType(); return this;
+        }
+        assertParametersMatch();
+        assertReturnType();
+        return this;
     }
 
     /**
@@ -474,7 +509,8 @@ public class MethodTester {
     public void addParameter(ParameterMatcher... interfaceMatcher) {
         if (parameters == null) {
             parameters = new ArrayList<>();
-        } parameters.addAll(Arrays.asList(interfaceMatcher));
+        }
+        parameters.addAll(Arrays.asList(interfaceMatcher));
     }
 
     /**
@@ -550,7 +586,8 @@ public class MethodTester {
      * Asserts that {@link ClassTester#classInstance} is not {@code null}
      */
     public void assertClassResolved() {
-        assertClassTesterNotNull(); classTester.assertClassResolved();
+        assertClassTesterNotNull();
+        classTester.assertClassResolved();
     }
 
     /**
@@ -620,7 +657,9 @@ public class MethodTester {
      * @return the Invocations of the Method
      */
     public List<Invocation> getInvocations() {
-        assertMethodResolved(); classTester.assertSpied(); return classTester.getMockingDetails().getInvocations().stream().filter(x -> x.getMethod().getName().equals(getTheMethod().getName())).collect(Collectors.toList());
+        assertMethodResolved();
+        classTester.assertSpied();
+        return classTester.getMockingDetails().getInvocations().stream().filter(x -> x.getMethod().getName().equals(getTheMethod().getName())).collect(Collectors.toList());
     }
 
     // public boolean needsJavadoc() {
@@ -660,7 +699,8 @@ public class MethodTester {
      * @return the Returned Value of the Method
      */
     public Object invokeWithRandomParams() {
-        assertMethodResolved(); return invoke(getRandomParams());
+        assertMethodResolved();
+        return invoke(getRandomParams());
     }
 
     /**
@@ -680,20 +720,30 @@ public class MethodTester {
      * @param disallowedConstructs the Disallowed Constructs
      */
     public void assertConstructsNotUsed(List<Class<? extends CtCodeElement>> disallowedConstructs) {
-        var method = assertCtMethodExists(); var test = test(); for (var construct : disallowedConstructs)
-            if (!method.getElements(new TypeFilter<>(construct)).isEmpty()) test.add(() -> fail(String.format("<%s> was used unexpectedly", construct.getSimpleName().substring(2)))); test.run();
+        var method = assertCtMethodExists();
+        var test = test();
+        for (var construct : disallowedConstructs)
+            if (!method.getElements(new TypeFilter<>(construct)).isEmpty())
+                test.add(() -> fail(String.format("<%s> was used unexpectedly", construct.getSimpleName().substring(2))));
+        test.run();
     }
 
     public void assertConstructsUsed(List<Class<? extends CtCodeElement>> disallowedConstructs) {
-        var method = assertCtMethodExists(); var test = test(); for (var construct : disallowedConstructs)
-            if (method.getElements(new TypeFilter<>(construct)).isEmpty()) test.add(() -> fail(String.format("<%s> was not used unexpectedly", construct.getSimpleName().substring(2)))); test.run();
+        var method = assertCtMethodExists();
+        var test = test();
+        for (var construct : disallowedConstructs)
+            if (method.getElements(new TypeFilter<>(construct)).isEmpty())
+                test.add(() -> fail(String.format("<%s> was not used unexpectedly", construct.getSimpleName().substring(2))));
+        test.run();
     }
 
     public CtMethod<?> assertCtMethodExists() {
-        assureResolved(); Launcher spoon = assertDoesNotThrow(() -> getClassTester().assureSpoonLauncherModelsBuild().getSpoon(), "Could not Create Spoon Launcher");
+        assureResolved();
+        Launcher spoon = assertDoesNotThrow(() -> getClassTester().assureSpoonLauncherModelsBuild().getSpoon(), "Could not Create Spoon Launcher");
         CtType<?> type = assertDoesNotThrow(() -> spoon.getModel().getAllTypes().stream().filter(CtType::isTopLevel).findFirst().orElseThrow(),
             "Could not resolve Class Source for Class " + classTester.getClassIdentifier().identifierName + "." + "available Class Sources:" + spoon.getModel().getAllTypes().toString());
-        CtMethod<?> method = assertDoesNotThrow(() -> type.getMethodsByName(getMethodIdentifier().identifierName).stream().findFirst().orElseThrow(), "Could not resolve Method Source for Method " + getTheMethod().getName()); return method;
+        CtMethod<?> method = assertDoesNotThrow(() -> type.getMethodsByName(getMethodIdentifier().identifierName).stream().findFirst().orElseThrow(), "Could not resolve Method Source for Method " + getTheMethod().getName());
+        return method;
     }
 
     public void assertDirectlyRecursive() {
@@ -701,7 +751,9 @@ public class MethodTester {
     }
 
     public void assertRecursive(int level) {
-        var m = assertCtMethodExists(); if (!isRecursive(m.getDirectChildren(), m, level)) fail(String.format("method <%s> is not recursive", getMethodIdentifier().identifierName));
+        var m = assertCtMethodExists();
+        if (!isRecursive(m.getDirectChildren(), m, level))
+            fail(String.format("method <%s> is not recursive", getMethodIdentifier().identifierName));
     }
 
     public void assertNotDirectlyRecursive() {
@@ -709,7 +761,9 @@ public class MethodTester {
     }
 
     public void assertNotRecursive(int level) {
-        var m = assertCtMethodExists(); if (isRecursive(m.getDirectChildren(), m, level)) fail(String.format("method <%s> is recursive", getMethodIdentifier().identifierName));
+        var m = assertCtMethodExists();
+        if (isRecursive(m.getDirectChildren(), m, level))
+            fail(String.format("method <%s> is recursive", getMethodIdentifier().identifierName));
     }
 
 
@@ -772,13 +826,17 @@ public class MethodTester {
      * @see #countMatchingParameters(Method, String, ArrayList, boolean)
      */
     public Method resolveMethod(Class<?> theClass, String methodName, double similarity, ArrayList<ParameterMatcher> parameters, boolean allowSuperClass) {
-        similarity = Math.max(0, Math.min(similarity, 1)); ClassTester.assertClassNotNull(theClass, "zu Methode " + methodName);
+        similarity = Math.max(0, Math.min(similarity, 1));
+        ClassTester.assertClassNotNull(theClass, "zu Methode " + methodName);
         ArrayList<Method> methods = allowSuperClass ? getAllMethods(theClass) : new ArrayList<>(Arrays.asList(theClass.getDeclaredMethods()));
         var bestMatch = methods.stream().sorted((x, y) -> Double.valueOf(TestUtils.similarity(methodName, y.getName())).compareTo(TestUtils.similarity(methodName, x.getName()))).findFirst().orElse(null);
-        assertMethodNotNull(bestMatch, methodName); var sim = TestUtils.similarity(bestMatch.getName(), methodName);
-        assertTrue(sim >= similarity, getMethodNotFoundMessage() + "Ähnlichster Methodenname:" + bestMatch.getName() + " with " + sim + " similarity."); if (parameters != null) {
+        assertMethodNotNull(bestMatch, methodName);
+        var sim = TestUtils.similarity(bestMatch.getName(), methodName);
+        assertTrue(sim >= similarity, getMethodNotFoundMessage() + "Ähnlichster Methodenname:" + bestMatch.getName() + " with " + sim + " similarity.");
+        if (parameters != null) {
             // Account for overloads
-            var matches = methods.stream().filter(x -> TestUtils.similarity(methodName, x.getName()) == sim).collect(Collectors.toCollection(ArrayList::new)); if (matches.size() > 1) {
+            var matches = methods.stream().filter(x -> TestUtils.similarity(methodName, x.getName()) == sim).collect(Collectors.toCollection(ArrayList::new));
+            if (matches.size() > 1) {
                 // Find Best match according to parameter options
                 bestMatch = matches.stream().sorted((x, y) -> Integer.valueOf(countMatchingParameters(y, methodName, parameters, true)).compareTo(countMatchingParameters(x, methodName, parameters, true))).findFirst().orElse(null);
             }
@@ -826,9 +884,11 @@ public class MethodTester {
      * @see #countMatchingParameters(Method, String, ArrayList, boolean)
      */
     public Method resolveMethod() {
-        assertClassTesterNotNull(); if (!classResolved()) {
+        assertClassTesterNotNull();
+        if (!classResolved()) {
             classTester.resolveClass();
-        } return resolveMethod(classTester.theClass, methodIdentifier.identifierName, methodIdentifier.similarity, parameters, allowSuperClass);
+        }
+        return resolveMethod(classTester.theClass, methodIdentifier.identifierName, methodIdentifier.similarity, parameters, allowSuperClass);
     }
 
     /**
@@ -839,7 +899,8 @@ public class MethodTester {
     public MethodTester assureResolved() {
         if (!methodResolved()) {
             resolveMethod();
-        } return this;
+        }
+        return this;
     }
 
     /**

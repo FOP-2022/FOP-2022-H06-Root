@@ -7,15 +7,16 @@ import reflection.ParameterMatcher;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import static java.lang.reflect.Modifier.PUBLIC;
 import static h.Global.SIMILARITY;
-import static java.util.Objects.*;
+import static java.lang.reflect.Modifier.PUBLIC;
+import static java.util.Objects.requireNonNullElseGet;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.mock;
 
 public class DownTraverser_STUD extends Traverser_STUD {
 
     private static ClassTester<?> cDownTraverserO;
+
     public static ClassTester<?> cDownTraverser() {
         return cDownTraverserO = requireNonNullElseGet(cDownTraverserO, () -> new ClassTester<>(
             "h06",
@@ -25,6 +26,7 @@ public class DownTraverser_STUD extends Traverser_STUD {
     }
 
     private static MethodTester mGetFirstIndexO;
+
     public static MethodTester mGetFirstIndexS() {
         return mGetFirstIndexO = requireNonNullElseGet(mGetFirstIndexO, () -> new MethodTester(
             cDownTraverser(),
@@ -37,6 +39,7 @@ public class DownTraverser_STUD extends Traverser_STUD {
     }
 
     private static MethodTester mGetNextIndexO;
+
     public static MethodTester mGetNextIndexS() {
         return mGetNextIndexO = requireNonNullElseGet(mGetNextIndexO, () -> new MethodTester(
             cDownTraverser(),

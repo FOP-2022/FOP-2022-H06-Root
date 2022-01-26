@@ -1,13 +1,18 @@
 package h;
 
-import org.sourcegrade.jagr.api.rubric.*;
+import org.sourcegrade.jagr.api.rubric.Criterion;
+import org.sourcegrade.jagr.api.rubric.Grader;
+import org.sourcegrade.jagr.api.rubric.JUnitTestRef;
+import org.sourcegrade.jagr.api.rubric.Rubric;
+import org.sourcegrade.jagr.api.rubric.RubricForSubmission;
+import org.sourcegrade.jagr.api.rubric.RubricProvider;
 import org.sourcegrade.jagr.api.testing.RubricConfiguration;
 
 import static org.sourcegrade.jagr.api.rubric.Grader.descendingPriority;
 import static org.sourcegrade.jagr.api.rubric.Grader.testAwareBuilder;
-import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.*;
 import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.and;
 import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.ofMethod;
+import static org.sourcegrade.jagr.api.rubric.JUnitTestRef.or;
 
 @RubricForSubmission("h06")
 public class H_Rubric implements RubricProvider {
@@ -305,8 +310,8 @@ public class H_Rubric implements RubricProvider {
         .shortDescription("Mindestens eine der beiden Methoden ist korrekt deklariert.")
         .grader(testAwareBuilder().requirePass(
                 or(
-                        ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
-                        ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1"))
+                    ofMethod(() -> H3_Tests.H3_2_1.class.getMethod("test1")),
+                    ofMethod(() -> H3_Tests.H3_2_2.class.getMethod("test1"))
                 )
             ).pointsFailedMin()
             .pointsPassedMax()

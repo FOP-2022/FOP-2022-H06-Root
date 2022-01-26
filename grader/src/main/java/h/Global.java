@@ -1,7 +1,5 @@
 package h;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import tutor.MyTransformer;
 import tutor.Utils.State;
 

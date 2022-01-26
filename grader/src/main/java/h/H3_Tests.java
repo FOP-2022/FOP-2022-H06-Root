@@ -1,6 +1,11 @@
 package h;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import reference.UpTraverser_REF;
 import spoon.support.reflect.code.CtForEachImpl;
@@ -23,10 +28,19 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static reference.StrangeThings_REF.transformArray_REF;
 import static student.DownTraverser_STUD.cDownTraverser;
-import static student.StrangeThings_STUD.*;
+import static student.StrangeThings_STUD.doTheRecursion_STUD;
+import static student.StrangeThings_STUD.mDoTheRecursion;
+import static student.StrangeThings_STUD.mTransformArrayIteratively;
+import static student.StrangeThings_STUD.mTransformArrayRecursively;
+import static student.StrangeThings_STUD.resetStrangeThingsMock;
+import static student.StrangeThings_STUD.transformArrayIteratively_STUDENT;
+import static student.StrangeThings_STUD.transformArrayRecursively_STUDENT;
 import static student.Traverser_STUD.cTraverser;
-import static student.UpTraverser_STUD.*;
-import static tutor.Utils.Messages.*;
+import static student.UpTraverser_STUD.cUpTraverser;
+import static tutor.Utils.Messages.incorrect;
+import static tutor.Utils.Messages.incorrectOrderOfWhenUsing;
+import static tutor.Utils.Messages.incorrectReturnedObject;
+import static tutor.Utils.Messages.incorrectValuesInWhenUsing;
 import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
 import static tutor.Utils.TestCollection.test;
 

@@ -25,10 +25,11 @@ public abstract class AbstractArrayTraverser extends AbstractTraverser_STUD {
 
     public List<Integer> getActualArrayCallOrder(double[] array) {
         for (int i = 0; i < array.length; i++)
-            array[i] = Math.floor(((array[i]-3.14)/2)/array.length);
+            array[i] = Math.floor(((array[i] - 3.14) / 2) / array.length);
         class Entry {
             final int index;
             final double value;
+
             Entry(int index, double value) {
                 this.index = index;
                 this.value = value;

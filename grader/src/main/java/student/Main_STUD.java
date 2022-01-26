@@ -11,6 +11,7 @@ import static h.Global.SIMILARITY;
 public class Main_STUD {
 
     private static ClassTester<?> cMainO;
+
     public static ClassTester<?> cMain() {
         return cMainO = Objects.requireNonNullElseGet(cMainO, () -> new ClassTester<>(
             "h06",
@@ -20,6 +21,7 @@ public class Main_STUD {
     }
 
     private static MethodTester mMainO;
+
     public static MethodTester mMain() {
         return mMainO = Objects.requireNonNullElseGet(mMainO, () -> new MethodTester(
             cMain(),

@@ -60,7 +60,8 @@ public class StrangeThings {
 
     public int whatTheHellIsThat1(int var1, int var2) {
         int var10000;
-        label15: {
+        label15:
+        {
 
 
             if (var1 > 0) {
@@ -135,7 +136,7 @@ public class StrangeThings {
             var5[var3] = var1[var3] * 2.0D + 3.14D;
             var6 = 0;
 
-            while(true) {
+            while (true) {
                 var10001 = var1.length - 1;
 
                 if (var6 >= var10001) {
@@ -152,7 +153,7 @@ public class StrangeThings {
             var5[var1.length - 1 - var3] = var1[var3] * 2.0D + 3.14D;
             var6 = 0;
 
-            while(true) {
+            while (true) {
                 var10001 = var1.length - 1;
 
                 if (var6 >= var10001) {

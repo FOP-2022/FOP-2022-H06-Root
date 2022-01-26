@@ -253,11 +253,17 @@ public interface Utils {
                 return TestCollection.this;
             }
 
-            boolean toShow() {return show;}
+            boolean toShow() {
+                return show;
+            }
 
-            boolean terminate() {return terminate;}
+            boolean terminate() {
+                return terminate;
+            }
 
-            boolean newType() {return newType;}
+            boolean newType() {
+                return newType;
+            }
         }
 
     }

@@ -11,11 +11,11 @@ import java.util.Objects;
 
 import static h.Global.SIMILARITY;
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class ReturnData_STUD implements Mocked {
 
     private static ClassTester<?> cReturnDataO;
+
     public static ClassTester<?> cReturnData() {
         return cReturnDataO = Objects.requireNonNullElseGet(cReturnDataO, () -> new ClassTester<>(
             "h06",
@@ -24,6 +24,7 @@ public class ReturnData_STUD implements Mocked {
     }
 
     private static AttributeTester aResultO;
+
     public static AttributeTester aResult() {
         return aResultO = Objects.requireNonNullElseGet(aResultO, () ->
             new AttributeTester()
@@ -37,6 +38,7 @@ public class ReturnData_STUD implements Mocked {
     }
 
     private static AttributeTester aNextIndexO;
+
     public static AttributeTester aNextIndex() {
         return aNextIndexO = Objects.requireNonNullElseGet(aNextIndexO, () -> new AttributeTester()
             .setClassTester(cReturnData())
@@ -82,7 +84,8 @@ public class ReturnData_STUD implements Mocked {
         return aNextIndex().getValue(object);
     }
 
-    public @NotNull Object getActualObject() {
+    public @NotNull
+    Object getActualObject() {
         return object;
     }
 

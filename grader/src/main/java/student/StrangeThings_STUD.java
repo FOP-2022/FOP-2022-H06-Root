@@ -10,7 +10,9 @@ import reflection.ParameterMatcher;
 import java.util.List;
 
 import static h.Global.SIMILARITY;
-import static java.lang.reflect.Modifier.*;
+import static java.lang.reflect.Modifier.PRIVATE;
+import static java.lang.reflect.Modifier.PUBLIC;
+import static java.lang.reflect.Modifier.STATIC;
 import static java.util.Objects.requireNonNullElseGet;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -20,6 +22,7 @@ import static student.Traverser_STUD.cTraverser;
 public class StrangeThings_STUD {
 
     private static ClassTester<?> cStrangeThings;
+
     public static ClassTester<?> cStrangeThings() {
         return cStrangeThings = requireNonNullElseGet(cStrangeThings, () -> new ClassTester<>(
             "h06",
@@ -28,6 +31,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mWhatTheHellIsThat1;
+
     public static MethodTester mWhatTheHellIsThat1() {
         return mWhatTheHellIsThat1 = requireNonNullElseGet(mWhatTheHellIsThat1, () -> new MethodTester(
             cStrangeThings(),
@@ -43,6 +47,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mWhatTheHellIsThat2;
+
     public static MethodTester mWhatTheHellIsThat2() {
         return mWhatTheHellIsThat2 = requireNonNullElseGet(mWhatTheHellIsThat2, () -> new MethodTester(
             cStrangeThings(),
@@ -58,6 +63,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mComputeStrangeValue1;
+
     public static MethodTester mComputeStrangeValue1() {
         return mComputeStrangeValue1 = requireNonNullElseGet(mComputeStrangeValue1, () -> new MethodTester(
             cStrangeThings(),
@@ -72,6 +78,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mComputeStrangeValue2;
+
     public static MethodTester mComputeStrangeValue2() {
         return mComputeStrangeValue2 = requireNonNullElseGet(mComputeStrangeValue2, () -> new MethodTester(
             cStrangeThings(),
@@ -86,6 +93,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mTransformArrayIteratively;
+
     public static MethodTester mTransformArrayIteratively() {
         return mTransformArrayIteratively = requireNonNullElseGet(mTransformArrayIteratively, () -> new MethodTester(
             cStrangeThings(),
@@ -99,6 +107,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mTransformArrayRecursively;
+
     public static MethodTester mTransformArrayRecursively() {
         return mTransformArrayRecursively = requireNonNullElseGet(mTransformArrayRecursively, () -> new MethodTester(
             cStrangeThings(),
@@ -112,6 +121,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mDoTheRecursion;
+
     public static MethodTester mDoTheRecursion() {
         return mDoTheRecursion = requireNonNullElseGet(mDoTheRecursion, () -> new MethodTester(
             cStrangeThings(),
@@ -128,6 +138,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mEvaluate;
+
     public static MethodTester mEvaluate() {
         return mEvaluate = requireNonNullElseGet(mEvaluate, () -> new MethodTester(
             cStrangeThings(),
@@ -141,6 +152,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mEvaluateRecursively;
+
     public static MethodTester getEvaluateRecursively() {
         return mEvaluateRecursively = requireNonNullElseGet(mEvaluateRecursively, () -> new MethodTester(
             cStrangeThings(),
@@ -155,6 +167,7 @@ public class StrangeThings_STUD {
     }
 
     private static MethodTester mTestEvaluate;
+
     public static MethodTester getTestEvaluate() {
         return mTestEvaluate = requireNonNullElseGet(mTestEvaluate, () -> new MethodTester(
             cStrangeThings(),
@@ -170,6 +183,7 @@ public class StrangeThings_STUD {
     }
 
     private static Object mock;
+
     public static Object getStrangeThingsMock() {
         return mock = requireNonNullElseGet(mock, () -> {
             Object m = Mockito.mock(cStrangeThings().getTheClass(), Answers.CALLS_REAL_METHODS);

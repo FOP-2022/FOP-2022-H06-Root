@@ -1,24 +1,19 @@
 package reflection;
 
-import tutor.Utils;
-import tutor.Utils.TestCollection;
-
 import java.lang.reflect.Field;
 import java.util.Objects;
 
 import static java.lang.reflect.Modifier.isStatic;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static reflection.TestUtils.assertModifier;
-import static tutor.Utils.TestCollection.*;
-import static tutor.Utils.TestCollection.Mode.*;
+import static tutor.Utils.TestCollection.Mode.SHOW_ALL;
+import static tutor.Utils.TestCollection.test;
 
 public class AttributeTester {
 
     private ClassTester<?> classTester;
     private AttributeMatcher matcher;
     private Field field;
-
-
 
 
     public AttributeTester setMatcher(AttributeMatcher matcher) {

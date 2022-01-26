@@ -1,10 +1,15 @@
 package student;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.IntStream.*;
+import static java.util.stream.IntStream.range;
 
 
 public class RandomTraverser extends AbstractArrayTraverser {
@@ -13,7 +18,7 @@ public class RandomTraverser extends AbstractArrayTraverser {
     private final Map<Integer, Integer> map = new HashMap<>();
 
     public RandomTraverser(Random random) {
-        this(random, 1+random.nextInt(9));
+        this(random, 1 + random.nextInt(9));
     }
 
     public RandomTraverser(Random random, int size) {

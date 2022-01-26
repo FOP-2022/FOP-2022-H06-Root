@@ -9,13 +9,16 @@ import tutor.Mocked;
 import java.util.List;
 import java.util.Objects;
 
-import static java.lang.reflect.Modifier.*;
 import static h.Global.SIMILARITY;
+import static java.lang.reflect.Modifier.ABSTRACT;
+import static java.lang.reflect.Modifier.INTERFACE;
+import static java.lang.reflect.Modifier.PUBLIC;
 import static java.util.Objects.requireNonNullElseGet;
 
 public abstract class Traverser_STUD implements Mocked {
 
     private static ClassTester<?> cTraverserO;
+
     public static ClassTester<?> cTraverser() {
         return cTraverserO = Objects.requireNonNullElseGet(cTraverserO, () -> new ClassTester<>(
             "h06",
@@ -25,6 +28,7 @@ public abstract class Traverser_STUD implements Mocked {
     }
 
     private static MethodTester mGetFirstIndexO;
+
     public static MethodTester mGetFirstIndex() {
         return mGetFirstIndexO = requireNonNullElseGet(mGetFirstIndexO, () -> new MethodTester(
             cTraverser(),
@@ -37,6 +41,7 @@ public abstract class Traverser_STUD implements Mocked {
     }
 
     private static MethodTester mGetNextIndexO;
+
     public static MethodTester mGetNextIndex() {
         return mGetNextIndexO = requireNonNullElseGet(mGetNextIndexO, () -> new MethodTester(
             cTraverser(),
