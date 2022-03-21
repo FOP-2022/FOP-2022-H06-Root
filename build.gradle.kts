@@ -33,6 +33,9 @@ dependencies {
         exclude("org.jetbrains", "annotations")
     }
     "graderImplementation"("org.ow2.asm:asm-util:9.2")
+    "graderImplementation"("org.mockito:mockito-core:4.4.0")
+    "graderImplementation"("com.google.guava:guava:31.1-jre")
+    "graderImplementation"("fr.inria.gforge.spoon:spoon-core:10.0.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 }
 
