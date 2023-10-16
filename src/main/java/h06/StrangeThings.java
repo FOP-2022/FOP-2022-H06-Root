@@ -1,79 +1,184 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package h06;
 
+
 public class StrangeThings {
+    public StrangeThings() {
 
-    public static int computeStrangeValue1(int n) {
-        return n <= 0 ? 1 : n % 2 == 0 ? 1 + computeStrangeValue1(n - 1) : 1 + computeStrangeValue1(n - 3);
+        super();
     }
 
-    public static int computeStrangeValue2(int n) {
-        if (n <= 0) {
-            return 1;
-        } else if (0 == n % 2) {
-            return 1 + computeStrangeValue2(n - 1);
+    public int computeStrangeValue1(int var1) {
+
+
+        int var10000;
+        if (var1 <= 0) {
+            var10000 = 1;
+
         } else {
-            return 1 + computeStrangeValue2(n - 3);
+            var10000 = var1 % 2;
+
+            if (var10000 == 0) {
+                int var2 = var1 - 1;
+                var10000 = 1 + this.computeStrangeValue1(var2);
+
+            } else {
+                int var3 = var1 - 3;
+                var10000 = 1 + this.computeStrangeValue2(var3);
+            }
         }
+
+        var1 = var10000;
+        return var1;
     }
 
-    public static int whatTheHellIsThat1(int m, int n) {
-        return m <= 0 || n <= 0 ? 0 : m < n ? whatTheHellIsThat1(1 + m, n - m) : whatTheHellIsThat1(1 + n, m - n);
-    }
+    public int computeStrangeValue2(int var1) {
 
-    public static int whatTheHellIsThat2(int m, int n) {
-        if (m <= 0 || n <= 0) {
-            return 0;
-        } else if (m < n) {
-            return whatTheHellIsThat2(1 + m, n - m);
+
+        if (var1 <= 0) {
+            var1 = 1;
+
         } else {
-            return whatTheHellIsThat2(1 + n, m - n);
+            int var10000 = var1 % 2;
+
+            if (var10000 == 0) {
+                int var4 = var1 - 1;
+                var1 = 1 + this.computeStrangeValue2(var4);
+
+            } else {
+                int var5 = var1 - 3;
+                var1 = 1 + this.computeStrangeValue2(var5);
+            }
         }
+
+        return var1;
     }
 
-    public static double[] transformArrayIteratively(double[] in, Traverser t) {
-        double[] result = new double[in.length];
-        for (int i = t.getFirstIndex(in); 0 <= i && i < in.length; i = t.getNextIndex(i)) {
-            result[i] = 3.14 + 2 * in[i];
+    public int whatTheHellIsThat1(int var1, int var2) {
+        int var10000;
+        label15:
+        {
+
+
+            if (var1 > 0) {
+
+                if (var2 > 0) {
+
+                    if (var1 < var2) {
+                        var10000 = 1 + var1;
+                        int var6 = var2 - var1;
+                        int var7 = var10000;
+                        var10000 = this.whatTheHellIsThat1(var7, var6);
+
+                    } else {
+                        var10000 = 1 + var2;
+                        int var8 = var1 - var2;
+                        int var9 = var10000;
+                        var10000 = this.whatTheHellIsThat1(var9, var8);
+                    }
+                    break label15;
+                }
+            }
+
+            byte var3;
+            var10000 = var3 = 0;
+
         }
-        return result;
+
+        int var10 = var10000;
+        return var10;
     }
 
-    public static double[] transformArrayRecursively(double[] in, Traverser t) {
-        double[] out = new double[in.length];
-        doTheRecursion(in, out, t, t.getFirstIndex(in));
-        return out;
+    public int whatTheHellIsThat2(int var1, int var2) {
+
+
+        int var3;
+        if (var1 > 0) {
+
+            if (var2 > 0) {
+
+                int var10000;
+                if (var1 < var2) {
+                    var10000 = 1 + var1;
+                    int var10 = var2 - var1;
+                    int var11 = var10000;
+                    var3 = this.whatTheHellIsThat2(var11, var10);
+
+                } else {
+                    var10000 = 1 + var2;
+                    int var12 = var1 - var2;
+                    int var13 = var10000;
+                    var3 = this.whatTheHellIsThat2(var13, var12);
+                }
+
+                return var3;
+            }
+        }
+
+        var3 = 0;
+
+        return var3;
     }
 
-    private static void doTheRecursion(double[] in, double[] out, Traverser t, int i) {
-        if (i < 0 || i >= in.length) {
-            return;
+    public double[] transformArrayIteratively(double[] var1, Traverser var2) {
+
+        int var3 = var2.getFirstIndex(var1);
+        int var4 = var2.getNextIndex(var3);
+        double[] var5 = new double[var1.length];
+
+        int var10001;
+        int var6;
+        if (var3 == 0) {
+            var5[var3] = var1[var3] * 2.0D + 3.14D;
+            var6 = 0;
+
+            while (true) {
+                var10001 = var1.length - 1;
+
+                if (var6 >= var10001) {
+
+                    break;
+                }
+
+                var5[var4] = var1[var4] * 2.0D + 3.14D;
+                var4 = var2.getNextIndex(var4);
+                ++var6;
+
+            }
+        } else {
+            var5[var1.length - 1 - var3] = var1[var3] * 2.0D + 3.14D;
+            var6 = 0;
+
+            while (true) {
+                var10001 = var1.length - 1;
+
+                if (var6 >= var10001) {
+                    break;
+                }
+
+                var5[var1.length - 1 - var4] = var1[var4] * 2.0D + 3.14D;
+                var4 = var2.getNextIndex(var4);
+                ++var6;
+
+            }
         }
-        out[i] = 3.14 + 2 * in[i];
-        doTheRecursion(in, out, t, t.getNextIndex(i));
+
+        return var5;
     }
 
-    public static int evaluate(String in) {
-        return evaluate(in.toCharArray());
+    public double[] transformArrayRecursively(double[] var1, Traverser var2) {
+
+        double[] var3 = new double[var1.length];
+        byte var14 = 0;
+        this.doTheRecursion(var1, var3, var2, var14);
+        return var3;
     }
 
-    public static int evaluate(char[] in) {
-        return evaluateRecursively(in, 0).result;
-    }
+    public void doTheRecursion(double[] var1, double[] var2, Traverser var3, int var4) {
 
-    private static ReturnData evaluateRecursively(char[] in, int i) {
-        char c = in[i];
-        if (Character.isDigit(c)) {
-            return new ReturnData(Character.getNumericValue(c), i + 1);
-        }
-        ReturnData s1 = evaluateRecursively(in, i + 1);
-        ReturnData s2 = evaluateRecursively(in, s1.nextIndex);
-        // optional
-        if (c == '+') {
-            return new ReturnData(s1.result + s2.result, s2.nextIndex);
-        }
-        if (c == '-') {
-            return new ReturnData(s1.result - s2.result, s2.nextIndex);
-        }
-        throw new IllegalArgumentException("Illegal character '" + c + "' at position " + i);
     }
 }
